@@ -1,4 +1,5 @@
 {% load static %}
+{% load version %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,26 @@
             {% endif %}
         </ul>
     </nav>
-    <div class="content" style="margin-top: 2%; margin-left: 2%;">
-        <p><a href="{% url 'words' %}">Words</a></p>
-        <p><a href="{% url 'expressions' %}">Expressions</a></p>
+	{% for item in soup %}
+	<div class="card">
+        <div class="card-body back">
+        	<h1>{{item.0}} {{item.1}}</h1>
+            <div>Transliteration: {{item.2}}<br>Equivalence in English: {{item.3}}</div>
+            <audio class="sound" src="{{item.4}}">
+        		Your browser does not support the <code>audio</code> element.
+    		</audio>
+    		<div><img src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
+            <a href="{% url 'sum1min' expression_number=item.0|to_int %}">Again (<1m)</a>
+            <a href="{% url 'sum10min' expression_number=item.0|to_int %}">Good (<10m)</a>
+            <a href="{% url 'sum4days' expression_number=item.0|to_int %}">Easy (<4d)</a>
+        </div>
+        <div class="card-body front">
+        	<button class="btn btn-primary flip-btn">Flip card</button>
+        	<h1>{{item.0}} {{item.1}}</h1>
+        </div>
     </div>
+	{% endfor %}
 
-    <script type="text/javascript" src="{% static 'js/russian.js' %}">  </script>
+	<script type="text/javascript" src="{% static 'js/russian.js' %}">	</script>
 </body>
 </html>

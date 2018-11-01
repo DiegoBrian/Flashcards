@@ -1,0 +1,51 @@
+{% load static %}
+{% load version %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Russian Flashcards</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'css/russian.css' %}" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand abs" href="{% url 'index' %}">Flashcards</a>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+	{% for item in soup %}
+	<div class="card">
+        <div class="card-body back">
+        	<h1>{{item.0}} {{item.2}}</h1>
+            <div>Equivalence in English: {{item.3}}<br>Part of speech: {{item.4}}</div>
+            <audio class="sound" src="{{item.1}}">
+        		Your browser does not support the <code>audio</code> element.
+    		</audio>
+    		<div><img src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
+            <a href="{% url 'sum_1min' word_number=item.0|to_int %}">Again (<1m)</a>
+            <a href="{% url 'sum_10min' word_number=item.0|to_int %}">Good (<10m)</a>
+            <a href="{% url 'sum_4days' word_number=item.0|to_int %}">Easy (<4d)</a>
+        </div>
+        <div class="card-body front">
+        	<button class="btn btn-primary flip-btn">Flip card</button>
+        	<h1>{{item.0}} {{item.2}}</h1>
+        </div>
+    </div>
+	{% endfor %}
+
+	<script type="text/javascript" src="{% static 'js/russian.js' %}">	</script>
+</body>
+</html>

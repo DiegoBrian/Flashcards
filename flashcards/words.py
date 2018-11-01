@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 import requests
 from bs4 import BeautifulSoup
 from flashcards.models import *
@@ -6,6 +7,7 @@ import datetime
 from django.utils import timezone
 import math
 
+@login_required
 def index (request):
 
 	level = controller (request.user)
@@ -30,7 +32,7 @@ def index (request):
 		scraping = get_data2(level, columns[4:])
 	
 		
-	return render(request, 'index.html',{'soup' : scraping})
+	return render(request, 'words.html',{'soup' : scraping})
 
 def winner(request):
 	pass
@@ -67,24 +69,26 @@ def get_level (user):
 	relationship = User_Word.objects.filter(user = user).order_by('-word_number')
 	return relationship[0].word_number
 
-
+@login_required
 def sum_1min (request, word_number):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
 	relationship.time = timezone.now() + datetime.timedelta(minutes=1)
 	relationship.save()
-	return redirect('index')
+	return redirect('words')
 
+@login_required
 def sum_10min (request, word_number):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
 	relationship.time = timezone.now() + datetime.timedelta(minutes=10)
 	relationship.save()
-	return redirect('index')
+	return redirect('words')
 
+@login_required
 def sum_4days (request, word_number):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
 	relationship.time = timezone.now() + datetime.timedelta(days=4)
 	relationship.save()
-	return redirect('index')
+	return redirect('words')
 
 
 def get_data (level, columns):
