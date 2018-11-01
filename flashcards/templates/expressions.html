@@ -34,7 +34,7 @@
             <audio class="sound" src="{{item.4}}">
         		Your browser does not support the <code>audio</code> element.
     		</audio>
-    		<div><img src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
+    		<div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
             <a href="{% url 'sum1min' expression_number=item.0|to_int %}">Again (<1m)</a>
             <a href="{% url 'sum10min' expression_number=item.0|to_int %}">Good (<10m)</a>
             <a href="{% url 'sum4days' expression_number=item.0|to_int %}">Easy (<4d)</a>
@@ -42,6 +42,10 @@
         <div class="card-body front">
         	<button class="btn btn-primary flip-btn">Flip card</button>
         	<h1>{{item.0}} {{item.1}}</h1>
+            <audio class="sound" src="{{item.4}}">
+                Your browser does not support the <code>audio</code> element.
+            </audio>
+            <div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
         </div>
     </div>
 	{% endfor %}
