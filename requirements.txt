@@ -1,0 +1,4 @@
+beautifulsoup4==4.5.1
+requests
+Pillow
+DateTime 4.3
