@@ -60,7 +60,7 @@ def controller (user):
 	return level
 
 def delete_all(user):
-	teste = User_Expression.objects.all().delete()
+	teste = User_Expression.objects.filter(user=user).delete()
 	
 
 def get_level (user):

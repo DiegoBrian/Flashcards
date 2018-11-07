@@ -74,7 +74,7 @@ def controller (user):
 
 
 def delete_all(user):
-	teste = User_Word.objects.all().delete()
+	teste = User_Word.objects.filter(user=user).delete()
 	
 
 def get_level (user):
