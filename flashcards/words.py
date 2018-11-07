@@ -16,9 +16,10 @@ def index (request):
 
 	if level <= 50 :
 		url = 'http://masterrussian.com/vocabulary/most_common_words.htm'
-	else:
+	elif level <= 250:
 		url = 'http://masterrussian.com/vocabulary/most_common_words_'+str(math.ceil(level/50))+'.htm'
-
+	else:
+		url = 'http://masterrussian.com/vocabulary/most_common_words_'+str(math.ceil(level/100)+2)+'.htm'
 	
 	header = {'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko"}
 	soup = get_soup(url,header)
@@ -106,7 +107,10 @@ def get_data (level, columns):
 
 def get_data2 (level, columns):
 	scraping = []
-	counter = 4*(level-50*(math.ceil(level/50))-1)
+	if level<251:
+		counter = 4*(level - (50*(math.ceil(level/50)-1)+1))
+	else:
+		counter = 4*(level - (100*(math.ceil(level/100)-1)+1))
 	
 	line = []
 	line.append(filter_cyrillic(columns[counter].text))
