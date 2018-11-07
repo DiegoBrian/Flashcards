@@ -16,6 +16,10 @@ def index (request):
 
 	print(level)
 
+	if level == 301:
+		delete_all(request.user)
+		return redirect('words')
+
 	if level <= 50 :
 		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words.html')
 	elif level <= 250:
@@ -45,7 +49,7 @@ def get_soup(url, header):
 	return BeautifulSoup(r.content, 'html.parser')
 
 def get_pronunciation(query):
-	file_path = os.path.join(BASE_DIR, 'flashcards\static\\audio\\words\\'+query.replace(" ","_")+'.mp3')
+	file_path = 'http://localhost:8000/static/audio/words/'+query.replace(" ","_")+'.mp3'
 	return file_path
 
 def filter_cyrillic(word):
@@ -67,6 +71,10 @@ def controller (user):
 		
 	
 	return level
+
+
+def delete_all(user):
+	teste = User_Word.objects.all().delete()
 	
 
 def get_level (user):
@@ -88,9 +96,9 @@ def sum_10min (request, word_number):
 	return redirect('words')
 
 @login_required
-def sum_4days (request, word_number):
+def sum_12hours (request, word_number):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
-	relationship.time = timezone.now() + datetime.timedelta(days=4)
+	relationship.time = timezone.now() + datetime.timedelta(hours=12)
 	relationship.save()
 	return redirect('words')
 

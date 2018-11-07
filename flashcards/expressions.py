@@ -15,6 +15,9 @@ def index (request):
 
 	level = controller (request.user)
 
+	if level == 101:
+		delete_all(request.user)
+		return redirect('expressions')
 	
 	file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\100 Russian Phrases with Audio.html')
 	soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
@@ -33,7 +36,7 @@ def get_soup(url, header):
 	return BeautifulSoup(r.content, 'html.parser')
 
 def get_pronunciation(query):
-	file_path = os.path.join(BASE_DIR, 'flashcards\static\\audio\\expressions\\' +query[10:])
+	file_path = 'http://localhost:8000/static/audio/expressions/' +query[10:]
 	return file_path
 
 def filter_cyrillic(word):
@@ -55,6 +58,9 @@ def controller (user):
 		
 	
 	return level
+
+def delete_all(user):
+	teste = User_Expression.objects.all().delete()
 	
 
 def get_level (user):
@@ -76,9 +82,9 @@ def sum_10min (request, expression_number):
 	return redirect('expressions')
 
 @login_required
-def sum_4days (request, expression_number):
+def sum_12hours (request, expression_number):
 	relationship =  User_Expression.objects.get(user = request.user, expression_number=expression_number)
-	relationship.time = timezone.now() + datetime.timedelta(days=4)
+	relationship.time = timezone.now() + datetime.timedelta(hours=12)
 	relationship.save()
 	return redirect('expressions')
 
