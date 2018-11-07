@@ -6,6 +6,8 @@ from flashcards.models import *
 import datetime
 from django.utils import timezone
 import math
+import os
+from russian_flashcards.settings import BASE_DIR
 
 @login_required
 def index (request):
@@ -15,14 +17,14 @@ def index (request):
 	print(level)
 
 	if level <= 50 :
-		url = 'http://masterrussian.com/vocabulary/most_common_words.htm'
+		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words.html')
 	elif level <= 250:
-		url = 'http://masterrussian.com/vocabulary/most_common_words_'+str(math.ceil(level/50))+'.htm'
+		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words'+str(math.ceil(level/50))+'.html')
 	else:
-		url = 'http://masterrussian.com/vocabulary/most_common_words_'+str(math.ceil(level/100)+2)+'.htm'
+		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words'+str(math.ceil(level/100)+2)+'.html')
 	
-	header = {'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko"}
-	soup = get_soup(url,header)
+	
+	soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
 	table = soup.find("table", attrs={'class': 'topwords'})
 	columns = table.find_all("td")
 	scraping = []
@@ -43,7 +45,8 @@ def get_soup(url, header):
 	return BeautifulSoup(r.content, 'html.parser')
 
 def get_pronunciation(query):
-	return 'https://openrussian.org/audio-shtooka/' + query.replace(" ","_") + '.mp3'
+	file_path = os.path.join(BASE_DIR, 'flashcards\static\\audio\\words\\'+query.replace(" ","_")+'.mp3')
+	return file_path
 
 def filter_cyrillic(word):
 	return word.replace(u'\xa0', u'')

@@ -1,5 +1,3 @@
-$(document).ready( function() {
-
 $(".card").flip({
   axis: 'y',
   trigger: 'manual'
@@ -14,4 +12,4 @@ $(".flip-btn").click(function(){
   $(this).closest(".card").flip(true);
 });
 
-});
+

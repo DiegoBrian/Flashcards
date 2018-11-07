@@ -1,0 +1,99 @@
+HTML{BACKGROUND:url('http://masterrussian.com/graphics/bg.png') #fff repeat-y center top;}
+body{margin:0;padding:0;border:0;width:100%;min-width:500px;font-size:90%;text-align:center;color:#000;font:12px Verdana, Tahoma, Arial, sans-serif;line-height:17px;}
+hr{border:solid #cecece;border-width:1px 0 0 0;height:0;line-height:0px;font-size:0;margin:0;padding:0;margin-top:10px;margin-bottom:10px;}
+a{color:#000080;text-decoration:underline;}
+a:hover, visited{color:#000080;text-decoration:none;}
+a.russianLink, a.russianLink:visited{font-family:Verdana, Microsoft Sans Serif;font-size:13px;color:#000080;text-decoration:underline;font-weight:bold;}
+a.russianLink:hover{color:#d70000;text-decoration:underline;font-family:Verdana, Microsoft Sans Serif;font-size:13px;font-weight:bold;text-decoration:underline;}
+a.headerLink{font-family:Microsoft Sans Serif;font-size:15px;color:#000080;text-decoration:none;font-weight:bold;}
+a.headerLink:hover{color:#000080;text-decoration:underline;font-family:Microsoft Sans Serif;font-size:15px;font-weight:bold;}
+a.statusLink{color:#cecece;font-size:11px;line-height:22px;font-weight:normal;font-family:Verdana,"MS Sans Serif", Arial;text-decoration:none;}
+a.statusLink:hover{color:#fff;font-size:11px;line-height:22px;font-weight:normal;font-family:Verdana,"MS Sans Serif", Arial;text-decoration:underline;}
+h1, h2, h3, h5{margin:.8em 0 .2em 0;padding:0;}
+h4{margin-bottom:0.5em;padding-bottom:0em;color:#2F3699;font-family:Verdana, Arial, "Trebuchet MS";font-size:20px;}
+p{margin:.4em 0 .8em 0;padding:0;}
+img{}
+.fixed #wrapper{width:960px;text-align:left;margin:0 auto;}
+.liquid #wrapper{width:100%;text-align:left;margin:0;}
+#header{clear:both;float:left;width:100%;background:#fff;}
+#header{}
+#header p, #header h1, #header h2{padding:.4em 15px 0 15px;margin:0;}
+div.htop{text-align:right;width:960px;height:18px;background:#e8e8e8;color:#808080;font-size:10px;line-height:18px;font-weight:normal;font-family:"MS Sans Serif", Arial;}
+div.hlogos{height:110px;background:#fff;padding:0;}
+div.hlogoA{height:110px;float:left;margin-top:10px;}
+div.hlogoB{height:110px;float:right;margin-top:10px;padding-right:5px;}
+div.hstripe{text-align:center;width:960px;height:73px;background:url('/graphics/mrnew.jpg') #000080;color:#FFF;font-size:46px;line-height:73px;font-weight:bold;font-family:Arial,Verdana,"MS Sans Serif";}
+div.hstatus{text-align:right;width:960px;height:22px;background:#000080;color:#cecece;font-size:11px;line-height:22px;font-weight:normal;font-family:Verdana,"MS Sans Serif", Arial;}
+div.box{float:left;text-align:left;width:290px;background:#fff;margin-top:15px;margin-left:5px;}
+div.boxL{float:left;text-align:left;width:120px;background:#fff;margin-top:5px;margin-left:3px;}
+#header ul{clear:left;float:left;width:100%;list-style:none;margin:10px 0 0 0;padding:0;}
+#header ul li{display:inline;list-style:none;margin:0;padding:0;}
+#header ul li a{display:block;float:left;margin:0 0 0 1px;padding:3px 10px;text-align:center;background:#eee;color:#000;text-decoration:none;position:relative;left:15px;line-height:1.3em;}
+#header ul li a:hover{background:#369;color:#fff;}
+#header ul li a.active, #header ul li a.active:hover{color:#fff;background:#000;font-weight:bold;}
+#header ul li a span{display:block;}
+#layoutdims{clear:both;margin:0;padding:0px 15px !important;text-align:right;}
+.colmask{position:relative;clear:both;float:left;width:100%;overflow:hidden;}
+.holygrail{background:#fff;}
+.holygrail h1{margin-bottom:0.8em;padding-bottom:0.2em;margin-top:0.8em;color:#d70000;font-family:Verdana, Arial, "Trebuchet MS";font-size:18px;}
+.holygrail h2{margin-bottom:0.8em;padding-bottom:0.2em;margin-top:0.8em;color:#d70000;font-family:Verdana, Arial, "Trebuchet MS";font-size:14px;}
+.holygrail h3{margin-bottom:0.8em;padding-bottom:0.2em;margin-top:0.8em;color:#000;font-family:Verdana, Arial, "Trebuchet MS";font-size:14px;}
+.holygrail h5{margin-bottom:0.8em;padding-bottom:0.2em;margin-top:-1.7em;color:#999999;font-family:Verdana, Arial, "Trebuchet MS";font-size:10px;font-weight:normal;}
+.holygrail .colmid{float:left;width:200%;margin-left:-320px;position:relative;right:100%;background:#fff;border-right:1px solid #CECECE;}
+.holygrail .colleft{float:left;width:100%;margin-left:-50%;position:relative;left:470px;background:#FFF;border-right:1px solid #CECECE;}
+.holygrail .col1wrap{float:left;width:50%;position:relative;right:150px;padding-bottom:1em;}
+.holygrail .col1{margin:0 330px 0 165px;position:relative;left:200%;overflow:hidden;}
+.holygrail .col2{float:left;float:right;width:130px;position:relative;right:15px;}
+.holygrail .col3{float:left;float:right;width:300px;margin-right:30px;position:relative;left:50%;}
+.holygrail ol{margin:0px 0px 0px -10px;}
+.holygrail ul{list-style-type:none;padding:10px 0 10px 0;margin-top:-10px;margin-left:1em;color:#000;line-height:19px;}
+.holygrail ul li{padding-bottom:1px;}
+.holygrail li{}
+.holygrail li.first{font-weight:normal;padding:10px 0 0 0;color:#000;}
+.holygrail .related li{padding:10px 0 10px 0;margin-left:-1em;}
+.holygrail .related li{padding-bottom:10px;list-style-position:inside;background:url(graphics/icons.gif) 0 -559px no-repeat;padding:0;padding-left:16px;list-style:none;margin-top:5px;line-height:16px;}
+.holygrail .phrase_plain{list-style-type:none;padding:0px 0 15px 0;margin-top:-10px;margin-left:1em;color:#787878;}
+.holygrail .phrase_plain li{}
+.holygrail .phrase_plain li.first{font-weight:normal;padding:10px 0 0 0;color:#000;}
+.holygrail .phrase_plain li.second{font-weight:normal;color:#000;}
+div.related{margin-bottom:20px;width:170px;float:right;}
+div.rbox{font-size:10px;font-family:Verdana,Arial, Helvetica, sans-serif;margin-bottom:8px;padding:10px;background-color:#E8E8E8;border-bottom:1px solid #808080;line-height:1.3em;width:135px;float:right;}
+div.hbox{font-size:10px;font-weight:bold;color:#FFF;font-family:Verdana,Arial, Helvetica, sans-serif;margin-bottom:0px;padding:4px;background-color:#808080;line-height:0.8em;width:147px;float:right;}
+#footer{clear:both;float:left;width:100%;border-top:1px solid #000;background:#fff;}
+#footer p{padding:10px;margin:0;}
+.superleft{margin:5px 0px 0px 0px;padding:0;width:134px;float:left;line-height:11px;}
+.left{margin:0;padding:0;width:134px;float:left;background:#fff;line-height:11px;border-bottom:1px solid #fff;}
+.underleft{margin:0;padding:0;width:134px;float:left;line-height:11px;}
+.left h2{margin:5px 0 4px 0;font-size:13px;font-weight:bold;font-family:Arial, Sans-serif;line-height:10px;height:10px;color:#000;border:none;}
+.left ul{color:#aaa;text-align:left;margin:10px 0 0 0;padding-left:0px;text-decoration:none;list-style-type:none;line-height:0.95em;}
+.left ul li{padding:0px;margin:0px 0 0 6px;font-family:Verdana;}
+.left ul a{font-size:10px;font-weight:normal;color:#000080;text-decoration:underline;}
+.left ul a:hover{color:#000080;text-decoration:none;}
+table.topwords{margin-bottom:1.5em;border-collapse:collapse;text-align:left;font-size:12px;font-family:Verdana,Arial,Helvetica,sans-serif;}
+table.topwords td{padding:0.5em;border-right:solid 0px #fff;//border:solid 1px #555;border:none;border-bottom:1px solid #ccc;}
+table.topwords tr.rowTop{color:#000;font-size:12px;font-family:Verdana,Arial,Helvetica,sans-serif;background:#cecece;//url('/graphics/grid_bg.gif') top left repeat-x;border-right:solid 0px #fff;font-weight:normal;vertical-align:top;}
+table.topwords tr.rowFirst{background:#f6f6F6;//url('/graphics/grid_bg.gif') top left repeat-x;border-top:solid 0px #fff;color:inherit;vertical-align:top;}
+table.topwords tr.rowSecond{background:#fff;border-top:solid 0px #fff;color:inherit;vertical-align:top;}
+table.topwords td.word{font-size:12px;font-weight:bold;font-family:Verdana,"Trebuchet MS", Arial;color:#111;}
+table.topwords td.number{font-size:15px;font-weight:normal;font-family:Georgia,Verdana,"Trebuchet MS", Arial;color:#c75615;}
+table.topwords td.number2{font-size:15px;font-weight:normal;font-family:Georgia,Verdana,"Trebuchet MS", Arial;color:#111199;}
+table.topwords td.number3{font-size:15px;font-weight:normal;font-family:Georgia,Verdana,"Trebuchet MS", Arial;color:#119911;}
+table.topwords td.small{font-size:11px;}
+.topwords table td.bigLetter{font-size:18px;font-weight:bold;font-family:Arial,Verdana,"Trebuchet MS", Arial;color:#111;}
+table.cntr, table.cntr2{margin-left:auto;margin-right:auto;}
+table.cntr2 td{text-align:center;}
+table.cntr td{text-align:left;}
+ol.steps{margin:0px 0px 0px -14px;font-weight:normal;color:#000;background:white;line-height:19px;}
+ol.steps li a{font-size:100%;font-weight:normal;color:#000080;background:white;text-decoration:none;}
+ol.steps li a:hover{text-decoration:underline;}
+ol.steps li div{font-size:100%;font-weight:bold;color:#888;background:#f6f6f6;line-height:24px;}
+.green, .navy, .red{font-weight:bold;}
+.green{color:#008000;}
+.navy{color:#0000A0;}
+.red{color:#e60b36;}
+.wd{padding:0px;text-align:center;}
+.wd_rus{color:#d70000;font-size:20px;font-weight:bold;margin:-15px 0 5px 0;}
+.wd_pron{color:#3B3B3B;text-align:center;font-size:16px;}
+.wd_tran{color:#3B3B3B;text-align:center;font-weight:bold;font-family:Arial,Helvetica;font-size:16px;margin: 5px 0 5px 0;}
+.wd_cr{color:#999;font-size:10px;font-style:italic;margin-top:-5px;}
+#About{background:#000080;color:#cecece;text-align:right;font-size:11px;line-height:22px;font-weight:normal;font-family:Verdana,"MS Sans Serif", Arial;text-decoration:none;} 

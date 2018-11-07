@@ -1,0 +1,68 @@
+html, body, form, fieldset { margin: 0; padding: 0; border: none; -webkit-text-size-adjust:none; }
+h1, h2, h3, h4, h5, h6, ul, ol, dl { margin: .5em 0 0 0; padding: 0; }
+p { margin: 0 0 1em; padding: 0; }
+a:link,
+a:visited { text-decoration:none; color:#3a4371; }
+a:hover, 
+a:active, 
+a:focus { text-decoration:underline; color:#3a4371; }
+a img { border:none; text-decoration:none; }
+
+body { font:14px "Myriad Pro", "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, Sans-Serif; line-height: 1.5; color:#333; background: #ace3f8 url(bg.jpg) left top repeat-x; text-align:center; width:100%; }
+h1 { font-size:250%; color:#000; margin-bottom:1em; }
+h2 { font-size:200%; font-weight:normal; }
+div#container { margin:0 auto;  width:960px; }
+div#logotype { width:188px; float:left; }
+
+div#utilnav { float:right; width:486px; height:41px; margin-top:33px; }
+div#utilnav ul { float:left; width:486px; height:41px; list-style: none; margin:0; }
+div#utilnav ul li { display:block; float:left; margin:0; padding:0; text-align:center;  }
+div#utilnav ul li#home a { width:86px; height:31px; padding-top:10px; display:block; float:left; background: transparent url(but_tpnv_home_off.png) left top no-repeat; text-indent:-9999px; }
+div#utilnav ul li#downloads a { width:142px; height:31px; padding-top:10px; display:block; float:left; background: transparent url(but_tpnv_downloads_off.png) left top no-repeat; }
+div#utilnav ul li#phrasebooks a { width:142px; height:31px; padding-top:10px; display:block; float:left; background: transparent url(but_tpnv_phrasebooks_off.png) left top no-repeat; }
+div#utilnav ul li#support a { width:116px; height:31px; padding-top:10px; display:block; float:left; background: transparent url(but_tpnv_support_off.png) left top no-repeat; }
+div#utilnav ul li#home a.current  { background: transparent url(but_tpnv_home_on.png) left top no-repeat; color:#fff; }
+div#utilnav ul li#downloads a.current { background: transparent url(but_tpnv_downloads_on.png) left top no-repeat; color:#fff; }
+div#utilnav ul li#phrasebooks a.current { background: transparent url(but_tpnv_phrasebooks_on.png) left top no-repeat; color:#fff; }
+div#utilnav ul li#support a.current { background: transparent url(but_tpnv_support_on.png) left top no-repeat; color:#fff; }
+div#utilnav ul li a:link, 
+div#utilnav ul li a:visited, 
+div#utilnav ul li a:hover, 
+div#utilnav ul li a:active, 
+div#utilnav ul li a:focus { font-weight:bold; color:#000; text-decoration:none; }
+
+div#content { width:960px; float:left; background:white; border-radius:16px; box-shadow: 0px 0px 5px rgba(0,0,0,0.5); margin:28px 0 0 0; }
+
+
+
+div#content div#features { float:left; width:950px; margin:30px 5px;  }
+
+div#content div#foot { background:transparent; width:960px; min-height:43px; text-align:left; margin-bottom:-1px; }
+div#footer { width:960px; margin: 0 auto; float:left; height:80px; }
+div#footer div#copyright { float:left;  color:#567f8f; text-align:left; margin:10px 0 0 0; font-size:110%; }
+div#footer div#copyright ul { list-style: none; }
+div#footer div#copyright ul li { display:block; width:auto; float:left; margin: 0; padding: 0; }
+div#footer div#copyright ul li a { color:#567f8f; padding-left:15px; margin-left:15px; border-left:1px solid #a3cdf6; }
+div#localization { float:right; vertical-align:middle; padding:10px;}
+div#localization img { vertical-align:middle;}
+
+
+
+
+#basic-modal-content {display:none;}
+
+/* Overlay */
+#simplemodal-overlay {background-color:#000;}
+
+/* Container */
+#simplemodal-container {height:420px; width:680px; color:#bbb; background-color:#eee; border:4px solid #444; padding:12px;}
+#simplemodal-container .simplemodal-data {padding:8px;}
+#simplemodal-container a.modalCloseImg {background:url(btn_close.png) no-repeat; width:42px; height:42px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+
+table.choose-language-table { width:100%; }
+table.choose-language-table td { text-align:left; vertical-align:middle; font-size:150%; padding:10px; color:#3a4371; }
+table.choose-language-table td a { vertical-align:middle; }
+table.choose-language-table img { vertical-align:middle; }
+table.choose-language-table td.less-wide { width: 30% }
+table.choose-language-table td.more-wide { width: 40% }
+div#change-language-title { text-align:left; margin-bottom:30px; font-size:180%; color:#4c4c4c; }

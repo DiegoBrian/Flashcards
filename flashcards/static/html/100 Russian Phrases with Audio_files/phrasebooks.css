@@ -1,0 +1,64 @@
+// Place all the styles related to the phrasebook controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.phrasebooks {} 
+
+body.phrasebooks h1 { color:#4c4c4c; text-align:left; margin-left:30px; margin-top:30px;  line-height:110%; }
+
+
+body.phrasebooks div#description { color:#4c4c4c; font-size:12pt; text-align:left; margin-left:30px; margin-bottom:40px; width:60%; line-height:140%; }
+body.phrasebooks div#leftcolumn { float:left; width:40%; padding-left:6%; margin-bottom: 100px; }
+body.phrasebooks div#rightcolumn { float:right; width:40%; padding-right:6%; margin-bottom: 100px;  }
+body.phrasebooks h2 { color:#4c4c4c;  border-radius: 12px; padding:10px; margin-bottom:10px; font-size:140%;
+	background-color: #e2e2cc;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#edede1), to(#e2e2cc));
+  	background-image: -webkit-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:    -moz-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:      -o-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:         linear-gradient(to bottom, #edede1, #e2e2cc);
+}
+
+body.phrasebooks table.phrasebooks { margin-left:30px; margin-right:30px; margin-bottom:80px;}
+body.phrasebooks table.phrasebooks td { text-align:left; }
+body.phrasebooks table.phrasebooks a { margin-left:15px; font-size:140%; }
+
+
+
+body.phrasebook div#title_area { margin-left:30px; margin-top:20px; margin-right:50px; margin-bottom:10px;}
+body.phrasebook div#hero { float:left; margin-right:20px; }
+body.phrasebook h1 { text-align:left; font-size:320%; color:#4c4c4c; margin:0px; padding:0px; }
+body.phrasebook h2 { text-align:left;  font-size:230%; color:#76695a; margin:0px; padding:0px; }
+body.phrasebook div.appbox { float:right; width:420px; background-color:#444; margin-bottom:20px; border-top-left-radius:16px; border-bottom-left-radius:16px; padding:10px; }
+body.phrasebook div.appbox div.imgbox {float:right; margin-left:10px;}
+body.phrasebook div.appbox div.description { color:white; margin-top:8px; margin-left: 20px; margin-bottom: 30px; font-size:120%; text-align: left;}
+
+
+
+
+body.phrasebook table.nemocards { clear: both; border-collapse:collapse;  margin-left:60px; margin-bottom:20px; }
+body.phrasebook table.nemocards tr:nth-child(odd) {
+    background-color: #e2e2cc;
+	  background-image: -webkit-gradient(linear, left top, left bottom, from(#edede1), to(#e2e2cc));
+  	background-image: -webkit-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:    -moz-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:      -o-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:         linear-gradient(to bottom, #edede1, #e2e2cc);
+
+}
+body.phrasebook table.nemocards td { padding:24px; }
+body.phrasebook table.nemocards td.audio-column {  border-top-left-radius: 44px; border-bottom-left-radius: 44px; padding-left: 30px}
+body.phrasebook table.nemocards td.scripts-column {  width:100%; margin-right: 20px; }
+body.phrasebook table.nemocards div.target1 { text-align:left; font-size:180%; color:#4c4c4c; }
+body.phrasebook table.nemocards div.target2 { text-align:left; font-size:150%; color:#3a4371; }
+body.phrasebook table.nemocards div.translation { text-align:left;  font-size:130%; color:#76695a; }
+
+
+body.phrasebook div#language_description { padding: 0px 280px 80px 280px; color:#999; background-color:transparent;}
+body.phrasebook td.regionslanguages { width:20%; vertical-align:top; }
+
+
+
+
+
+

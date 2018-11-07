@@ -1,0 +1,53 @@
+// Place all the styles related to the downloads controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+body.download div#content { margin:0; position:relative; }
+body.download div#content div#head { background: transparent url(bg_appdownload_chinese.jpg) left top no-repeat; min-height:700px; padding:60px 0 0 350px; width:610px; }
+
+body.download div.downloadbox { background: transparent url(bg_appdownload_box_bot.png) left bottom no-repeat; width:250px; height:220px; padding-bottom:20px; text-align:center; float:left; margin-right:30px; }
+body.download div.downloadbox h3 { background: transparent url(bg_appdownload_box_top.png) left top no-repeat; color:#fff; font-size:180%; position:relative; top:-20px; padding:8px 0; }
+body.download div.downloadbox h4 { font-size:150%; margin:0; }
+body.download div.downloadbox p { margin:0; padding:0 20px; width:210px; }
+body.download div.downloadbox p.button { margin:1em 0 0 0; }
+body.download div.downloadbox p.button a { display:block; padding:0; margin:0; height:79px; }
+
+body.download div#content { position:relative; }
+body.download div#content div#upgradenote { text-align:left; width:524px; height:250px;margin:0; padding:95px 30px 35px 30px; position:absolute; top:445px; left:325px;  background: transparent url(bg_upgrade_bubble.png) center top no-repeat;}
+body.download div#content div#upgradenote h2 { font-size:150%; margin-left:40px; }
+body.download div#content div#upgradenote ul { font-size:120%; margin:1em 2em 0 40px; list-style:none; }
+body.download div#content div#upgradenote ul li { margin-bottom:.5em; background: transparent url(ico_checkmark_black2.png) left 4px no-repeat; padding-left:30px; }
+
+
+
+
+body.downloads h1 { color:#4c4c4c; text-align:left; margin-left:30px; margin-top:30px; line-height:110%; }
+
+body.downloads table.downloads-table-headers { width:100%; }
+body.downloads table.downloads-table-headers td.wide { width:64%; }
+body.downloads table.downloads-table-headers td.on-the-right1 { width:16%; }
+body.downloads table.downloads-table-headers td.on-the-right2 { width:20%; }
+
+
+body.downloads table.downloads-table { width:880px; clear: both; border-collapse:collapse; margin-left:80px; margin-bottom:120px;}
+body.downloads table.downloads-table tr:nth-child(odd) {
+    background-color: #e2e2cc;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#edede1), to(#e2e2cc));
+  	background-image: -webkit-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:    -moz-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:      -o-linear-gradient(top, #edede1, #e2e2cc);
+  	background-image:         linear-gradient(to bottom, #edede1, #e2e2cc);
+
+}
+
+
+body.downloads table.downloads-table td { padding:16px; }
+body.downloads table.downloads-table td.app-icon {  border-top-left-radius: 50px; border-bottom-left-radius: 50px; padding-left:24px;}
+body.downloads table.downloads-table td.app-label { text-align:left; color:#4c4c4c; font-size:180%; }
+body.downloads table.downloads-table td.free-label { width:150px; text-align:right; color:#76695a; font-size:130%; }
+body.downloads table.downloads-table td.download-on-app-store { width:120px; text-align:left; }
+body.downloads table.downloads-table td.download-on-google-play { width:150px; text-align:left; }
+

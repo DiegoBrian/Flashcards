@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Russian Flashcards</title>
+    <title>Russian</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/russian.css' %}" />
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/flip.js' %}"></script>
 
 </head>
 <body>
@@ -31,7 +31,7 @@
         <div class="card-body back">
         	<h1>{{item.0}} {{item.2}}</h1>
             <div>Equivalence in English: {{item.3}}<br>Part of speech: {{item.4}}</div>
-            <audio class="sound" src="{{item.1}}">
+            <audio class="sound" src="{{item.1}}" controls>
         		Your browser does not support the <code>audio</code> element.
     		</audio>
     		<div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>

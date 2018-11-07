@@ -6,19 +6,18 @@ from flashcards.models import *
 import datetime
 from django.utils import timezone
 import math
+import os
+from russian_flashcards.settings import BASE_DIR
+
 
 @login_required
 def index (request):
 
 	level = controller (request.user)
 
-	print(level)
-
-	url = 'http://www.nemoapps.com/phrasebooks/russian'
-
 	
-	header = {'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko"}
-	soup = get_soup(url,header)
+	file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\100 Russian Phrases with Audio.html')
+	soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
 	columns = soup.find_all("td")
 	scraping = []
 		
@@ -34,7 +33,8 @@ def get_soup(url, header):
 	return BeautifulSoup(r.content, 'html.parser')
 
 def get_pronunciation(query):
-	return 'http://www.nemoapps.com' + query
+	file_path = os.path.join(BASE_DIR, 'flashcards\static\\audio\\expressions\\' +query[10:])
+	return file_path
 
 def filter_cyrillic(word):
 	return word.replace(u'\xa0', u'').replace('\n', '')
