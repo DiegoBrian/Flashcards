@@ -16,26 +16,23 @@ def index (request):
 
 	print(level)
 
-	if level == 301:
-		delete_all(request.user)
-		return redirect('words')
-
 	if level <= 50 :
 		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words.html')
 	elif level <= 250:
 		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words'+str(math.ceil(level/50))+'.html')
-	else:
+	elif level <= 300:
 		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\Most Common Russian Words'+str(math.ceil(level/100)+2)+'.html')
 	
-	
-	soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
-	table = soup.find("table", attrs={'class': 'topwords'})
-	columns = table.find_all("td")
+	if level <= 300:
+		soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
+		table = soup.find("table", attrs={'class': 'topwords'})
+		columns = table.find_all("td")
+		
 	scraping = []
 	
 	if level <= 50 :
 		scraping = get_data(level, columns[5:])
-	else:
+	elif level <= 300:
 		scraping = get_data2(level, columns[4:])
 	
 		
@@ -67,7 +64,10 @@ def controller (user):
 		level = relationship[0].word_number
 	else:
 		level = get_level(user)+1
-		User_Word.objects.create(user = user, word_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
+		if level <=300:
+			User_Word.objects.create(user = user, word_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
+		else:
+			level = relationship[0].word_number		
 		
 	
 	return level

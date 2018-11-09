@@ -15,16 +15,14 @@ def index (request):
 
 	level = controller (request.user)
 
-	if level == 101:
-		delete_all(request.user)
-		return redirect('expressions')
-	
-	file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\100 Russian Phrases with Audio.html')
-	soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
-	columns = soup.find_all("td")
+	if level<=100:	
+		file_path = os.path.join(BASE_DIR, 'flashcards\static\html\\100 Russian Phrases with Audio.html')
+		soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
+		columns = soup.find_all("td")
 	scraping = []
-		
-	scraping = get_data(level, columns)
+	
+	if level<=100:	
+		scraping = get_data(level, columns)
 
 	return render(request, 'expressions.html',{'soup' : scraping})
 
@@ -54,7 +52,10 @@ def controller (user):
 		level = relationship[0].expression_number
 	else:
 		level = get_level(user)+1
-		User_Expression.objects.create(user = user, expression_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
+		if level <=100:
+			User_Expression.objects.create(user = user, expression_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
+		else:
+			level = relationship[0].expression_number				
 		
 	
 	return level
