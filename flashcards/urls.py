@@ -7,11 +7,11 @@ from . import index
 urlpatterns = [
 	path('', index.index, name = 'index'),
     path('words', words.index, name='words'),
-    path('add1min/<int:word_number>', words.sum_1min, name='sum_1min'),
-    path('add10min/<int:word_number>', words.sum_10min, name='sum_10min'),
-    path('add12hours/<int:word_number>', words.sum_12hours, name='sum_12hours'),
+    path('whard/<int:word_number>/<int:current_box>/', words.hard, name='word_hard'),
+    path('wok/<int:word_number>/<int:current_box>/', words.ok, name='word_ok'),
+    path('weasy/<int:word_number>/<int:current_box>/', words.easy, name='word_easy'),
     path('expressions', expressions.index, name='expressions'),
-    path('expressions/add1min/<int:expression_number>', expressions.sum_1min, name='sum1min'),
-    path('expressions/add10min/<int:expression_number>', expressions.sum_10min, name='sum10min'),
-    path('expressions/add12hours/<int:expression_number>', expressions.sum_12hours, name='sum12hours'),
+    path('ehard/<int:expression_number>/<int:current_box>/', expressions.hard, name='expression_hard'),
+    path('eok/<int:expression_number>/<int:current_box>/', expressions.ok, name='expression_ok'),
+    path('eeasy/<int:expression_number>/<int:current_box>/', expressions.easy, name='expression_easy'),
 ]

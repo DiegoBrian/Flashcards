@@ -9,6 +9,18 @@ import math
 import os
 from russian_flashcards.settings import BASE_DIR
 
+time = [datetime.timedelta(0, 5), 
+		datetime.timedelta(0, 25), 
+		datetime.timedelta(0, 120), 
+		datetime.timedelta(0, 600), 
+		datetime.timedelta(0, 3600), 
+		datetime.timedelta(0, 18000), 
+		datetime.timedelta(1), 
+		datetime.timedelta(5), 
+		datetime.timedelta(25),
+		datetime.timedelta(120),
+		datetime.timedelta(365)]
+
 @login_required
 def index (request):
 
@@ -35,11 +47,18 @@ def index (request):
 	elif level <= 300:
 		scraping = get_data2(level, columns[4:])
 	
-		
-	return render(request, 'words.html',{'soup' : scraping})
+	current_box = get_current_box(request.user, level)
 
-def winner(request):
-	pass
+	context = {
+		'soup' : scraping,
+		'current_box' : current_box
+		}
+		
+	return render(request, 'words.html',context)
+
+def get_current_box(user, word_number):
+	word = User_Word.objects.get(user = user, word_number=word_number)
+	return word.box
 
 def get_soup(url, header):
 	r = requests.get(url, headers=header, allow_redirects=True)
@@ -82,23 +101,44 @@ def get_level (user):
 	return relationship[0].word_number
 
 @login_required
-def sum_1min (request, word_number):
+def easy (request, word_number, current_box):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
-	relationship.time = timezone.now() + datetime.timedelta(minutes=1)
+	print(relationship.time)
+	if current_box == 10:
+		relationship.time = timezone.now() + time[current_box]
+	else:
+		new_box = current_box+1
+		relationship.time = timezone.now() + time[new_box]
+		print("new_box: "+str(new_box))
+		relationship.box = new_box
+		relationship.save()
+	print(relationship.time)
 	relationship.save()
 	return redirect('words')
 
+
 @login_required
-def sum_10min (request, word_number):
+def ok (request, word_number, current_box):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
-	relationship.time = timezone.now() + datetime.timedelta(minutes=10)
+	print(relationship.time)
+	relationship.time = timezone.now() + time[current_box]
+	print(relationship.time)
 	relationship.save()
 	return redirect('words')
 
+
 @login_required
-def sum_12hours (request, word_number):
+def hard (request, word_number, current_box):
 	relationship =  User_Word.objects.get(user = request.user, word_number=word_number)
-	relationship.time = timezone.now() + datetime.timedelta(hours=12)
+	print(relationship.time)
+	if current_box == 0:
+		relationship.time = timezone.now() + time[current_box]
+	else:
+		new_box = current_box-1
+		relationship.time = timezone.now() + time[new_box]
+		relationship.box = new_box
+		relationship.save()
+	print(relationship.time)
 	relationship.save()
 	return redirect('words')
 

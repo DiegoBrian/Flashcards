@@ -16,6 +16,7 @@ class User_Word(models.Model):
         on_delete=models.CASCADE)
 	word_number = models.IntegerField('Word Number')
 	time = models.DateTimeField('Time')
+	box = models.IntegerField('Box', default=0)
 
 
 class User_Expression(models.Model):
@@ -23,3 +24,4 @@ class User_Expression(models.Model):
         on_delete=models.CASCADE)
 	expression_number = models.IntegerField('Expression Number')
 	time = models.DateTimeField('Time')
+	box = models.IntegerField('Box', default=0)
