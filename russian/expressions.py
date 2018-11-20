@@ -43,7 +43,7 @@ def index (request):
 		'current_box' : current_box
 		}
 
-	return render(request, 'expressions.html',context)
+	return render(request, 'russian/expressions.html',context)
 
 def get_current_box(user, expression_number):
 	expression = User_Expression.objects.get(user = user, expression_number=expression_number)

@@ -54,7 +54,7 @@ def index (request):
 		'current_box' : current_box
 		}
 		
-	return render(request, 'words.html',context)
+	return render(request, 'russian/words.html',context)
 
 def get_current_box(user, word_number):
 	word = User_Word.objects.get(user = user, word_number=word_number)

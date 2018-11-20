@@ -13,7 +13,7 @@ def teste(request):
 		'words': words
 	}
 
-	return render(request, 'teste.html', context)
+	return render(request, 'russian/teste.html', context)
 	
 
 

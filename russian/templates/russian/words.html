@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "russian/base.html" %}
 {% load static %}
 {% load version %}  
 
@@ -19,7 +19,7 @@
             <a href="{% url 'word_easy' word_number=item.0|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
         </div>
         <div class="card-body front">
-        	<button class="btn btn-primary flip-btn">Flip card</button>
+        	<button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
         	<h1>{{item.0}} {{item.2}}</h1>
             <audio class="sound" src="{{item.1}}">
                 Your browser does not support the <code>audio</code> element.
