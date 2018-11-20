@@ -1,32 +1,9 @@
+{% extends "base.html" %}
 {% load static %}
-{% load version %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Russian Flashcards</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-	<link rel="stylesheet" href="{% static 'css/russian.css' %}" />
-	<script src="{% static 'js/jquery.js' %}"></script>
-	<script src="{% static 'js/flip.js' %}"></script>
+{% load version %}	
 
-</head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand abs" href="{% url 'index' %}">Flashcards</a>
-        <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-	{% for item in soup %}
+{% block content %}
+    {% for item in soup %}
 	<div class="card">
         <div class="card-body back">
         	<h1>{{item.0}} {{item.1}}</h1>
@@ -51,7 +28,4 @@
         </div>
     </div>
 	{% endfor %}
-
-	<script type="text/javascript" src="{% static 'js/russian.js' %}">	</script>
-</body>
-</html>
+{% endblock %}

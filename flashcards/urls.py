@@ -3,6 +3,7 @@ from django.urls import path
 from . import words
 from . import expressions
 from . import index
+from . import teste
 
 urlpatterns = [
 	path('', index.index, name = 'index'),
@@ -14,4 +15,6 @@ urlpatterns = [
     path('ehard/<int:expression_number>/<int:current_box>/', expressions.hard, name='expression_hard'),
     path('eok/<int:expression_number>/<int:current_box>/', expressions.ok, name='expression_ok'),
     path('eeasy/<int:expression_number>/<int:current_box>/', expressions.easy, name='expression_easy'),
+
+	path('testes/', teste.teste, name='teste'),    
 ]

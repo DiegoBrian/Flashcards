@@ -5,6 +5,8 @@
   </head>
   <body>
 
-    {{soup}}
+    {% for word in words %}
+		{{word.word}} <br>
+    {% endfor %}
  </body>
  </html>
