@@ -18,7 +18,7 @@ time = [datetime.timedelta(0, 5),
 		datetime.timedelta(120),
 		datetime.timedelta(365)]
 
-
+@login_required
 def index (request):
 	level = controller (request.user)
 
