@@ -3,30 +3,47 @@
 {% load version %}  
 
 {% block content %}
-	{% for item in soup %}
 	<div class="card">
-        <div class="card-body back">
-        	<h1>{{item.0}} {{item.2}}</h1>
-            <div>Equivalence in English: {{item.3}}<br>Part of speech: {{item.4}}</div>
-            <audio class="sound" src="{{item.1}}">
-        		Your browser does not support the <code>audio</code> element.
-    		</audio>
-    		<div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
-            <a href="{% url 'word_hard' word_number=item.0|to_int current_box=current_box %}">Again (<{{current_box|add:"-1"|time}})</a>
-            {% if current_box != 10 and current_box != 0 %}
-            <a href="{% url 'word_ok' word_number=item.0|to_int current_box=current_box %}">Good (<{{current_box|time}})</a>
-            {% endif %} 
-            <a href="{% url 'word_easy' word_number=item.0|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
-        </div>
         <div class="card-body front">
-        	<button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
-        	<h1>{{item.0}} {{item.2}}</h1>
-            <audio class="sound" src="{{item.1}}">
+            <button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
+            <h1>{{soup.cyrillic}}</h1>
+            <audio class="sound" src="{{soup.audio}}">
                 Your browser does not support the <code>audio</code> element.
             </audio>
             <div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
         </div>
-    </div>
-	{% endfor %}
 
+        <div class="card-body back">
+            <h1>{{soup.number}} {{soup.cyrillic}}</h1>
+            
+            <div>
+                <h4>{{soup.english}}</h4>
+                <!--{{soup.function}}-->
+            </div>
+
+            <audio class="sound" src="{{soup.audio}}">
+        		Your browser does not support the <code>audio</code> element.
+            </audio>
+
+            <br>
+
+            <div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
+
+            <br>
+
+            <a class="btn btn-danger" href="{% url 'word_hard' word_number=soup.number|to_int current_box=current_box %}" role="button">Hard</a>
+
+            <a class="btn btn-warning" href="{% url 'word_ok' word_number=soup.number|to_int current_box=current_box %}" role="button">Good</a>
+            
+            <a class="btn btn-success" href="{% url 'word_easy' word_number=soup.number|to_int current_box=current_box %}" role="button">Easy</a>
+
+            <br>
+
+            <a href="{% url 'word_hard' word_number=soup.number|to_int current_box=current_box %}">Again (<{{current_box|add:"-1"|time}})</a>
+            {% if current_box != 10 and current_box != 0 %}
+                <a href="{% url 'word_ok' word_number=soup.number|to_int current_box=current_box %}">Good (<{{current_box|time}})</a>
+            {% endif %} 
+            <a href="{% url 'word_easy' word_number=soup.number|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
+        </div>
+    </div>
 {% endblock %}

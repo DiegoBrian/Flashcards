@@ -144,16 +144,15 @@ def hard (request, word_number, current_box):
 
 
 def get_data (level, columns):
-	scraping = []
-	counter = 5*(level-1)
-	line = []
-	line.append(filter_cyrillic(columns[counter].text))
-	line.append(get_pronunciation(filter_cyrillic(columns[counter+2].text)))
-	line.append(filter_cyrillic(columns[counter+2].text))
-	line.append(columns[counter+3].text)
-	line.append(columns[counter+4].text)
-	scraping.append(line)
-
+	counter = 5 * (level - 1)
+	scraping = {
+		'number': filter_cyrillic(columns[counter].text),
+		'audio': get_pronunciation(filter_cyrillic(columns[counter+2].text)),
+		'cyrillic': filter_cyrillic(columns[counter+2].text),
+		'english': columns[counter+3].text,
+		'function': columns[counter+4].text
+	}
+	
 	return scraping
 
 def get_data2 (level, columns):
