@@ -30,10 +30,14 @@ def index (request):
 
 	context = {
 		'sentence' : sentence,
-		'current_box' : current.box
+		'current_box' : current.box,
+		'video' : get_video_source(sentence.sentence)
 	}
 
 	return render(request, 'index.html', context)
+
+def get_video_source(sentence):
+	return 'http://localhost:8000/static/video/'+sentence+'.mp4'
 
 def controller (user):
 	relationship = User_Sentence.objects.filter(user = user)

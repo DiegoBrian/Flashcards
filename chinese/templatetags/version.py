@@ -19,3 +19,8 @@ def time(current_box):
 	else:
 		return times[current_box]
 
+
+@register.filter()
+def filter_chinese(sentence):
+	return sentence.replace('==', ' ')
+
