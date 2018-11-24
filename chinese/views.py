@@ -28,12 +28,18 @@ def index (request):
 
 	current = User_Sentence.find(request.user, level)
 
+	video = get_video(sentence.sentence)
+
 	context = {
 		'sentence' : sentence,
-		'current_box' : current.box
+		'current_box' : current.box,
+		'video' : video
 	}
 
 	return render(request, 'index.html', context)
+
+def get_video(sentence):
+	return 'http://localhost:8000/static/video/' + sentence + '.mp4'
 
 def controller (user):
 	relationship = User_Sentence.relationship(user)
@@ -67,7 +73,7 @@ def easy (request, sentence_number, current_box):
 		current_box = current_box + 1
 		relationship.box = current_box
 
-	relationship.time = updateTime(current_box)
+	relationship.time = update_time(current_box)
 	relationship.save()
 
 	return redirect('chinese_index')
@@ -76,7 +82,7 @@ def easy (request, sentence_number, current_box):
 def ok (request, sentence_number, current_box):
 	relationship =  User_Sentence.find(request.user, sentence_number)
 
-	relationship.time = updateTime(current_box)
+	relationship.time = update_time(current_box)
 
 	relationship.save()
 
@@ -91,7 +97,7 @@ def hard (request, sentence_number, current_box):
 		current_box = current_box - 1
 		relationship.box = current_box
 
-	relationship.time = updateTime(current_box)
+	relationship.time = update_time(current_box)
 	relationship.save()
 
 	return redirect('chinese_index')
@@ -99,5 +105,5 @@ def hard (request, sentence_number, current_box):
 def yesterday():
 	return datetime.datetime.now() - datetime.timedelta(days = 1)
 
-def updateTime(current_box):
+def update_time(current_box):
 	return timezone.now() + time[current_box]

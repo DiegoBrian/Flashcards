@@ -13,6 +13,11 @@
     padding-bottom: 2%;
 }
 
+.cardChinese {
+    padding-top: 0px !important;
+    padding-bottom: 1%;
+}
+
 img {
 	width: 30px;height: 30px;
 }

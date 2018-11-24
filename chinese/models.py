@@ -8,14 +8,13 @@ class Sentence(models.Model):
 	equivalence = models.CharField('Equivalence in English', max_length=3000, blank= True, null=True)
 
 	def __str__ (self):
-		return self.sentence
+		return '('+str(self.number)+')'+self.sentence
 
 	def find (number):
 		return Sentence.objects.get(number = number)
 
 	def number_of_words ():
 		return Sentence.objects.all().count()
-	
 
 class User_Sentence(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
