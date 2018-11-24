@@ -22,11 +22,11 @@ time = [datetime.timedelta(0, 5),
 def index (request):
 	level = controller (request.user)
 
-	print(level)
+	print("Level: " + str(level))
 
-	sentence = Sentence.objects.get(number = level)
+	sentence = Sentence.find(level)
 
-	current = User_Sentence.objects.get(user = request.user, sentence_number = level)
+	current = User_Sentence.find(request.user, level)
 
 	context = {
 		'sentence' : sentence,
@@ -36,68 +36,68 @@ def index (request):
 	return render(request, 'index.html', context)
 
 def controller (user):
-	relationship = User_Sentence.objects.filter(user = user)
+	relationship = User_Sentence.relationship(user)
+
 	if not relationship:
-		User_Sentence.objects.create(user = user, sentence_number = 1, time = datetime.datetime.now() - datetime.timedelta(days=1))
+		User_Sentence.create(user, yesterday())
 
-	relationship = User_Sentence.objects.filter(user = user).order_by('time')
+	relationship = User_Sentence.relationship(user).order_by('time').first()
 
-	if relationship[0].time <= timezone.now():
-		level = relationship[0].sentence_number
+	if relationship.time <= timezone.now():
+		level = relationship.sentence_number
 	else:
-		level = get_level(user)+1
-		number_of_words = Sentence.objects.all().count()
+		level = get_level(user) + 1
+		number_of_words = Sentence.number_of_words()
 		if(level > number_of_words):
-			level = relationship[0].sentence_number	
+			level = relationship.sentence_number	
 		else:
-			User_Sentence.objects.create(user = user, sentence_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
-		
+			User_Sentence.create(user, yesterday(), level)
+	
 	return level
 
-
 def get_level (user):
-	relationship = User_Sentence.objects.filter(user = user).order_by('-sentence_number')
-	return relationship[0].sentence_number
-
+	relationship = User_Sentence.relationship(user).order_by('-sentence_number').first()
+	return relationship.sentence_number
 
 @login_required
 def easy (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	if current_box == 10:
-		relationship.time = timezone.now() + time[current_box]
-	else:
-		new_box = current_box+1
-		relationship.time = timezone.now() + time[new_box]
-		print("new_box: "+str(new_box))
-		relationship.box = new_box
-		relationship.save()
-	print(relationship.time)
-	relationship.save()
-	return redirect('chinese_index')
+	relationship =  User_Sentence.find(request.user, sentence_number)
 
+	if current_box != 10:
+		current_box = current_box + 1
+		relationship.box = current_box
+
+	relationship.time = updateTime(current_box)
+	relationship.save()
+
+	return redirect('chinese_index')
 
 @login_required
 def ok (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	relationship.time = timezone.now() + time[current_box]
-	print(relationship.time)
+	relationship =  User_Sentence.find(request.user, sentence_number)
+
+	relationship.time = updateTime(current_box)
+
 	relationship.save()
+
 	return redirect('chinese_index')
 
 
 @login_required
 def hard (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	if current_box == 0:
-		relationship.time = timezone.now() + time[current_box]
-	else:
-		new_box = current_box-1
-		relationship.time = timezone.now() + time[new_box]
-		relationship.box = new_box
-		relationship.save()
-	print(relationship.time)
+	relationship =  User_Sentence.find(request.user, sentence_number)
+
+	if current_box != 0:
+		current_box = current_box - 1
+		relationship.box = current_box
+
+	relationship.time = updateTime(current_box)
 	relationship.save()
+
 	return redirect('chinese_index')
+
+def yesterday():
+	return datetime.datetime.now() - datetime.timedelta(days = 1)
+
+def updateTime(current_box):
+	return timezone.now() + time[current_box]
