@@ -18,6 +18,11 @@ time = [datetime.timedelta(0, 5),
 		datetime.timedelta(120),
 		datetime.timedelta(365)]
 
+'''
+verificar controls
+verificar lógica dos botões Hard, Good e Easy
+'''
+
 @login_required
 def index (request):
 	level = controller (request.user)
@@ -28,7 +33,7 @@ def index (request):
 
 	current = User_Sentence.find(request.user, level)
 
-	video = get_video(sentence.sentence)
+	video = get_video_url(sentence.sentence)
 
 	context = {
 		'sentence' : sentence,
@@ -38,8 +43,11 @@ def index (request):
 
 	return render(request, 'index.html', context)
 
-def get_video(sentence):
+def get_video_url(sentence):
+	print("Vídeo: " + sentence)
+	print("简体中文")
 	return 'http://localhost:8000/static/video/' + sentence + '.mp4'
+	#return 'http://localhost:8000/static/video/' + "简体中文" + '.mp4'
 
 def controller (user):
 	relationship = User_Sentence.relationship(user)
@@ -70,7 +78,13 @@ def easy (request, sentence_number, current_box):
 	relationship =  User_Sentence.find(request.user, sentence_number)
 
 	if current_box != 10:
-		current_box = current_box + 1
+		if current_box == 0:
+			step = 6
+		else:
+			step = 1
+		
+		current_box = current_box + step
+		
 		relationship.box = current_box
 
 	relationship.time = update_time(current_box)
