@@ -36,6 +36,7 @@ def index (request):
 	video = get_video_url(sentence.sentence)
 
 	context = {
+		'title': "Chinese",
 		'sentence' : sentence,
 		'current_box' : current.box,
 		'video' : video
@@ -45,9 +46,7 @@ def index (request):
 
 def get_video_url(sentence):
 	print("Vídeo: " + sentence)
-	print("简体中文")
 	return 'http://localhost:8000/static/video/' + sentence + '.mp4'
-	#return 'http://localhost:8000/static/video/' + "简体中文" + '.mp4'
 
 def controller (user):
 	relationship = User_Sentence.relationship(user)
@@ -63,7 +62,7 @@ def controller (user):
 		level = get_level(user) + 1
 		number_of_words = Sentence.number_of_words()
 		if(level > number_of_words):
-			level = relationship.sentence_number	
+			level = relationship.sentence_number
 		else:
 			User_Sentence.create(user, yesterday(), level)
 	

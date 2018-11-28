@@ -50,9 +50,10 @@ def index (request):
 	current_box = get_current_box(request.user, level)
 
 	context = {
+		'title': "Chinese",
 		'soup' : scraping,
 		'current_box' : current_box
-		}
+	}
 		
 	return render(request, 'russian/words.html',context)
 
