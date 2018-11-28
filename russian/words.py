@@ -50,7 +50,7 @@ def index (request):
 	current_box = get_current_box(request.user, level)
 
 	context = {
-		'title': "Chinese",
+		'title': "Russian",
 		'soup' : scraping,
 		'current_box' : current_box
 	}
