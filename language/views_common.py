@@ -1,3 +1,6 @@
+##	@file Views_Common
+#	Development of common rules, considering all handled languages
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import datetime
@@ -5,6 +8,8 @@ from django.utils import timezone
 import math
 import os
 
+##	@var time_step
+#	Standard time steps
 time_step = [datetime.timedelta(0, 5), 
 			datetime.timedelta(0, 25), 
 			datetime.timedelta(0, 120), 
@@ -16,18 +21,28 @@ time_step = [datetime.timedelta(0, 5),
 			datetime.timedelta(25),
 			datetime.timedelta(120),
 			datetime.timedelta(365)]
+##	@var max_amount 
+#	Maximum capacity of snippets of languages, whether words, expressions or sentences
 max_amount	= 300
+##	@var max_box
+#	Maximum possible time step
 max_box		= 10
+##	@var min_box
+#	Minimum possible time step
 min_box 	= 0
-big_step 	= 6
-small_step 	= 1
+##	@var extr_step
+#	Time step for extreme ease
+extr_step 	= 6
+##	@var std_step
+#	Standard time step
+std_step 	= 1
 
+##	Acquisition of the user level
+#	@param data_bases Databases for a specific language
+#	@param user Current platform user
+#	@return Current level from this user
 def get_level (data_bases, user):
-	'''	Acquisition of the user level
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@return Current level from this user
-	'''
+
 	relationship = data_bases['user'].latest_relationship(user)
 
 	if relationship.time <= timezone.now():
@@ -43,46 +58,41 @@ def get_level (data_bases, user):
 
 	return level
 
+##	Acquisition of the total number of records
+#	in the database
+#	@param data_bases Database under analysis
+#	@return The total amount, if any database,
+#	otherwise max_amount 
 def get_amount_total (data_bases):
-	'''	Acquisition of the total number of records
-		in the database
-		@param data_bases Database under analysis
-		@return The total amount, if any database,
-		otherwise max_amount 
-	'''
 	if data_bases['specific']:
 		return data_bases['specific'].amount_total()
 	else:
 		return max_amount
 
+##	Acquisition of the current context of the user
+#	@param data_bases Databases for a specific language
+#	@param user Current platform user
+#	@param level Current level from user
+#	@return Current context
 def get_current_box (data_bases, user, level):
-	'''	Acquisition of the current context of the user
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@param level Current level from user
-		@return Current context
-	'''
 	current_box = data_bases['user'].find(user, level).box
 
 	print("Current box: " + str(current_box))
 
 	return current_box
 
+##	Add a level to the user
+#	@param data_bases Databases for a specific language
+#	@param user Current platform user
+#	@return Correct next level
 def next_level (data_bases, user):
-	'''	Add a level to the user
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@return Correct next level
-	'''
 	return data_bases['user'].get_level(user) + 1
 
+##	Common rule for the choice of low difficulty
+#	@param data_bases Databases for a specific language
+#	@param user_data Current user data
+#	@return User registration update
 def easy_common (data_bases, user_data):
-	'''	Common rule for the choice of low difficulty
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@return User registration update
-	'''
-
 	db = data_bases['user']
 	user = user_data['user']
 	next_level = user_data['next_level']
@@ -92,9 +102,9 @@ def easy_common (data_bases, user_data):
 
 	if current_box != max_box:
 		if current_box == min_box:
-			step = big_step
+			step = extr_step
 		else:
-			step = small_step
+			step = std_step
 
 		current_box = current_box + step
 		
@@ -105,12 +115,11 @@ def easy_common (data_bases, user_data):
 
 	return
 
+##	Common rule for the choice of medium difficulty
+#	@param data_bases Databases for a specific language
+#	@param user_data Current user data
+#	@return User registration update
 def medium_common (data_bases, user_data):
-	'''	Common rule for the choice of medium difficulty
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@return User registration update
-	'''
 	db = data_bases['user']
 	user = user_data['user']
 	next_level = user_data['next_level']
@@ -122,12 +131,11 @@ def medium_common (data_bases, user_data):
 
 	return
 
+##	Common rule for the choice of hard difficulty
+#	@param data_bases Databases for a specific language
+#	@param user_data Current user data
+#	@return User registration update
 def hard_common (data_bases, user_data):
-	'''	Common rule for the choice of hard difficulty
-		@param data_bases Databases for a specific language
-		@param user Current platform user
-		@return User registration update
-	'''
 	db = data_bases['user']
 	user = user_data['user']
 	next_level = user_data['next_level']
@@ -136,7 +144,7 @@ def hard_common (data_bases, user_data):
 	relationship =  db.find(user, next_level)
 
 	if current_box > min_box:
-		current_box = current_box - small_step
+		current_box = current_box - std_step
 		relationship.box = current_box
 	elif current_box < min_box:
 		current_box = min_box
@@ -146,14 +154,13 @@ def hard_common (data_bases, user_data):
 
 	return
 
-def yesterday():
-	'''	Acquisition of yesterday, correctly
-	'''
+##	Acquisition of yesterday, correctly
+def yesterday():	
 	return datetime.datetime.now() - datetime.timedelta(days = 1)
 
+##	Acquisition of next sentence test time
+#	@param current_box Current context 
+#	@return Time updated
 def update_time(current_box):
-	'''	Acquisition of next sentence test time
-		@param current_box Current context 
-	'''
 	return timezone.now() + time_step[current_box]
 

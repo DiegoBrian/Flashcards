@@ -1,7 +1,7 @@
 from myproject.settings import BASE_DIR
 from bs4 import BeautifulSoup
 from russian.models import *
-from language.views import *
+from language.views_common import *
 import requests
 
 words_step = 50

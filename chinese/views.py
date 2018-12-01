@@ -1,11 +1,9 @@
-from language.views import * 
+from language.views_common import * 
 from chinese.models import *
 
 
 @login_required
 def index (request):
-	'''
-	'''
 	data_bases = {
 		'user': User_Sentence,
 		'specific': Sentence
@@ -30,17 +28,22 @@ def index (request):
 
 	return render(request, 'index.html', context)
 
+##	Acquire the video URL
+#	@param sentence Video's characteristic sentence, in chinese
+#	@return The video URL
 def get_url_video (sentence):
-	'''	Acquire the video URL
-		@param sentence Video's characteristic sentence
-		@return The video URL
-	'''
 	url_video = 'http://localhost:8000/static/video/' + sentence + '.mp4'
 
 	print ("URL: " + str(url_video))
 
 	return url_video
 
+##	Rule for the choice of low difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
 def easy (request, number, current_box):
 	data_bases = {
@@ -57,6 +60,12 @@ def easy (request, number, current_box):
 
 	return redirect('chinese_index')
 
+##	Rule for the choice of medium difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
 def ok (request, number, current_box):
 	data_bases = {
@@ -73,6 +82,12 @@ def ok (request, number, current_box):
 
 	return redirect('chinese_index')
 
+##	Rule for the choice of medium difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
 def hard (request, number, current_box):
 	data_bases = {
