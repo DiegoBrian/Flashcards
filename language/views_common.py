@@ -64,7 +64,7 @@ def get_level (data_bases, user):
 #	@return The total amount, if any database,
 #	otherwise max_amount 
 def get_amount_total (data_bases):
-	if data_bases['specific']:
+	if hasattr(data_bases, 'specific'):
 		return data_bases['specific'].amount_total()
 	else:
 		return max_amount

@@ -34,10 +34,10 @@ class User_Word(models.Model):
 									time = time)
 
 	def find (user):
-		return User_Sentence.objects.get(user = user)
+		return User_Word.objects.get(user = user)
 
 	def find (user, level):
-		return User_Sentence.objects.get(user = user,
+		return User_Word.objects.get(user = user,
 										number = level)
 
 	def get_current_box(user, number):

@@ -31,19 +31,19 @@
 
             <br>
 
-            <a class="btn btn-danger" href="{% url 'word_hard' word_number=soup.number|to_int current_box=current_box %}" role="button">Hard</a>
+            <a class="btn btn-danger" href="{% url 'word_hard' number=soup.number|to_int current_box=current_box %}" role="button">Hard</a>
 
-            <a class="btn btn-warning" href="{% url 'word_ok' word_number=soup.number|to_int current_box=current_box %}" role="button">Good</a>
+            <a class="btn btn-warning" href="{% url 'word_ok' number=soup.number|to_int current_box=current_box %}" role="button">Good</a>
             
-            <a class="btn btn-success" href="{% url 'word_easy' word_number=soup.number|to_int current_box=current_box %}" role="button">Easy</a>
+            <a class="btn btn-success" href="{% url 'word_easy' number=soup.number|to_int current_box=current_box %}" role="button">Easy</a>
 
             <br>
 
-            <a href="{% url 'word_hard' word_number=soup.number|to_int current_box=current_box %}">Again (<{{current_box|add:"-1"|time}})</a>
+            <a href="{% url 'word_hard' number=soup.number|to_int current_box=current_box %}">Again (<{{current_box|add:"-1"|time}})</a>
             {% if current_box != 10 and current_box != 0 %}
-                <a href="{% url 'word_ok' word_number=soup.number|to_int current_box=current_box %}">Good (<{{current_box|time}})</a>
+                <a href="{% url 'word_ok' number=soup.number|to_int current_box=current_box %}">Good (<{{current_box|time}})</a>
             {% endif %} 
-            <a href="{% url 'word_easy' word_number=soup.number|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
+            <a href="{% url 'word_easy' number=soup.number|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
         </div>
     </div>
 {% endblock %}
