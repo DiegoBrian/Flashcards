@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from language.views import yesterday
+from language.views_common import yesterday
 
 class Sentence(models.Model):
 	number = models.IntegerField('Number', default=0, blank= True, null=True)
