@@ -9,19 +9,65 @@ class Word(models.Model):
 	part_of_speech = models.CharField('Part of speech', max_length = 256, null=True, blank=True)
 	image = models.ImageField(upload_to='images', verbose_name='Image', null=True, blank=True)
 
+	def __str__ (self):
+		return '(' + str(self.number) + ') ' + self.word
+
+	def find (number):
+		return Word.objects.get(number = number)
 
 
 class User_Word(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
-	word_number = models.IntegerField('Word Number')
+	number = models.IntegerField('Word Number')
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
+
+	def create (user, time):
+		User_Word.objects.create(	user = user,
+									number = 1,
+									time = time)
+	
+	def create (user, time, number):
+		User_Word.objects.create(	user = user,
+									number = number,
+									time = time)
+
+	def find (user):
+		return User_Sentence.objects.get(user = user)
+
+	def find (user, level):
+		return User_Sentence.objects.get(user = user,
+										number = level)
+
+	def get_current_box(user, number):
+		word = User_Word.find(user, number)
+		return word.box
+
+	def relationship (user):
+		return User_Word.objects.filter(user = user)
+
+	def latest_relationship (user):
+		relationship = User_Word.relationship(user)
+
+		if not relationship:
+			User_Word.create(user, yesterday())
+
+		relationship = User_Word.relationship(user).order_by('time').first()
+
+		return relationship
+
+	def get_level (user):
+		relationship = User_Word.relationship(user).order_by('-number').first()
+		return relationship.number
+
+	def delete_all(user):
+		teste = User_Word.relationship(user).delete()
 
 
 class User_Expression(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
-	expression_number = models.IntegerField('Expression Number')
+	number = models.IntegerField('Expression Number')
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)

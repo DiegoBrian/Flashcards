@@ -16,11 +16,11 @@ time_step = [datetime.timedelta(0, 5),
 			datetime.timedelta(25),
 			datetime.timedelta(120),
 			datetime.timedelta(365)]
-
-max_box = 10
-min_box = 0
-big_step = 6
-small_step = 1
+max_amount	= 300
+max_box		= 10
+min_box 	= 0
+big_step 	= 6
+small_step 	= 1
 
 def get_level (data_bases, user):
 	'''	Acquisition of the user level
@@ -48,23 +48,12 @@ def get_amount_total (data_bases):
 		in the database
 		@param data_bases Database under analysis
 		@return The total amount, if any database,
-		otherwise 300 
+		otherwise max_amount 
 	'''
 	if data_bases['specific']:
 		return data_bases['specific'].amount_total()
 	else:
-		return 300
-
-def get_url_video (sentence):
-	'''	Acquire the video URL
-		@param sentence Video's characteristic sentence
-		@return The video URL
-	'''
-	url_video = 'http://localhost:8000/static/video/' + sentence + '.mp4'
-
-	print ("URL: " + str(url_video))
-
-	return url_video
+		return max_amount
 
 def get_current_box (data_bases, user, level):
 	'''	Acquisition of the current context of the user
@@ -149,6 +138,8 @@ def hard_common (data_bases, user_data):
 	if current_box > min_box:
 		current_box = current_box - small_step
 		relationship.box = current_box
+	elif current_box < min_box:
+		current_box = min_box
 
 	relationship.time = update_time(current_box)
 	relationship.save()
