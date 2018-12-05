@@ -1,10 +1,11 @@
 ##	@file Views_Common
 #	Development of common rules, considering all handled languages
-
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-import datetime
+from django.shortcuts import render, redirect
+from myproject.settings import BASE_DIR
 from django.utils import timezone
+from bs4 import BeautifulSoup
+import datetime
 import math
 import os
 
@@ -42,7 +43,6 @@ std_step 	= 1
 #	@param user Current platform user
 #	@return Current level from this user
 def get_level (data_bases, user):
-
 	relationship = data_bases['user'].latest_relationship(user)
 
 	if relationship.time <= timezone.now():
@@ -80,6 +80,20 @@ def get_current_box (data_bases, user, level):
 	print("Current box: " + str(current_box))
 
 	return current_box
+
+##	Characterization of data columns for the current level
+#	@param file_path The source file path
+#	@param level Current user level
+#	@return Matching columns
+def get_columns (file_path, level):
+	soup = BeautifulSoup (open (file_path, encoding='utf-8'), "html.parser")	
+	
+	table = soup.find ("table", attrs = {'class': 'topwords'})
+	
+	columns = table.find_all("td")
+
+	return columns
+
 
 ##	Add a level to the user
 #	@param data_bases Databases for a specific language

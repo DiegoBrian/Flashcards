@@ -1,53 +1,54 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-import requests
-from bs4 import BeautifulSoup
+from language.views_common import *
 from russian.models import *
-import datetime
-from django.utils import timezone
-import math
-import os
-from myproject.settings import BASE_DIR
+import requests
 
-time = [datetime.timedelta(0, 5), 
-		datetime.timedelta(0, 25), 
-		datetime.timedelta(0, 120), 
-		datetime.timedelta(0, 600), 
-		datetime.timedelta(0, 3600), 
-		datetime.timedelta(0, 18000), 
-		datetime.timedelta(1), 
-		datetime.timedelta(5), 
-		datetime.timedelta(25),
-		datetime.timedelta(120),
-		datetime.timedelta(365)]
-
+##	@var words_step
+#	Amount of words per page in the database
+expressions_max = 100
 
 @login_required
 def index (request):
+	data_bases = {
+		'user': User_Expression
+	}
 
-	level = controller (request.user)
+	level = get_level (data_bases, request.user)
 
-	if level<=100:	
-		file_path = os.path.join(BASE_DIR, 'russian\static\html\\100 Russian Phrases with Audio.html')
-		soup = BeautifulSoup(open(file_path, encoding='utf-8'), "html.parser")	
-		columns = soup.find_all("td")
-	scraping = []
-	
-	if level<=100:	
-		scraping = get_data(level, columns)
+	scraping = get_scraping (level)
 
-	current_box = get_current_box(request.user, level)
+	current_box = get_current_box (data_bases, request.user, level)
 
 	context = {
+		'title': "Russian",
 		'soup' : scraping,
 		'current_box' : current_box
-		}
+	}
 
-	return render(request, 'russian/expressions.html',context)
+	return render(request, 'russian/expressions.html', context)
 
-def get_current_box(user, expression_number):
-	expression = User_Expression.objects.get(user = user, expression_number=expression_number)
-	return expression.box
+##	Acquisition of data on the word of the current level
+#	@param level Current user level
+#	@return Number, audio, cyrillic, english and function
+#	about this word
+def get_scraping (level):
+	if level <= expressions_max:
+		file_path = get_file_path (level)
+
+		columns = get_columns (file_path, level)
+
+		return get_data (level, columns)
+
+	return []
+
+##	Acquire the file path
+#	@param level Current user level
+#	@return The file path 
+def get_file_path (level):
+	file_path = os.path.join(	BASE_DIR, 
+								'russian\static\html\\100 Russian Phrases with Audio.html')
+
+	return file_path
+
 
 def get_soup(url, header):
 	r = requests.get(url, headers=header, allow_redirects=True)
@@ -61,24 +62,6 @@ def filter_cyrillic(word):
 	return word.replace(u'\xa0', u'').replace('\n', '')
 
 
-def controller (user):
-	relationship = User_Expression.objects.filter(user = user)
-	if not relationship:
-		User_Expression.objects.create(user = user, expression_number = 1, time = datetime.datetime.now() - datetime.timedelta(days=1))
-
-	relationship = User_Expression.objects.filter(user = user).order_by('time')
-
-	if relationship[0].time <= timezone.now():
-		level = relationship[0].expression_number
-	else:
-		level = get_level(user)+1
-		if level <=100:
-			User_Expression.objects.create(user = user, expression_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
-		else:
-			level = relationship[0].expression_number				
-		
-	
-	return level
 
 def delete_all(user):
 	teste = User_Expression.objects.filter(user=user).delete()

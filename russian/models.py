@@ -71,3 +71,44 @@ class User_Expression(models.Model):
 	number = models.IntegerField('Expression Number')
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
+
+	def create (user, time):
+		User_Expression.objects.create(	user = user,
+									number = 1,
+									time = time)
+	
+	def create (user, time, number):
+		User_Expression.objects.create(	user = user,
+									number = number,
+									time = time)
+
+	def find (user):
+		return User_Expression.objects.get(user = user)
+
+	def find (user, level):
+		return User_Expression.objects.get(user = user,
+										number = level)
+
+	def get_current_box(user, number):
+		word = User_Expression.find(user, number)
+		return word.box
+
+	def relationship (user):
+		return User_Expression.objects.filter(user = user)
+
+	def latest_relationship (user):
+		relationship = User_Expression.relationship(user)
+
+		if not relationship:
+			User_Expression.create(user, yesterday())
+
+		relationship = User_Expression.relationship(user).order_by('time').first()
+
+		return relationship
+
+	def get_level (user):
+		relationship = User_Expression.relationship(user).order_by('-number').first()
+		return relationship.number
+
+	def delete_all(user):
+		teste = User_Expression.relationship(user).delete()

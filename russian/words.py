@@ -1,7 +1,6 @@
 from myproject.settings import BASE_DIR
-from bs4 import BeautifulSoup
-from russian.models import *
 from language.views_common import *
+from russian.models import *
 import requests
 
 ##	@var words_step
@@ -17,7 +16,7 @@ def index (request):
 
 	level = get_level (data_bases, request.user)
 
-	print(level)
+	print("User level: " + str(level))
 	
 	scraping = get_scraping (level)
 	
@@ -29,18 +28,21 @@ def index (request):
 		'current_box' : current_box
 	}
 		
-	return render(request, 'russian/words.html',context)
+	return render(request, 'russian/words.html', context)
 
 ##	Acquisition of data on the word of the current level
 #	@param level Current user level
 #	@return Number, audio, cyrillic, english and function
 #	about this word
 def get_scraping (level):
-	file_path = get_file_path (level)
+	if level <= max_amount:
+		file_path = get_file_path (level)
 
-	columns = get_columns (file_path, level)
+		columns = get_columns (file_path, level)
 
-	return get_scraping2 (level, columns)
+		return get_scraping2 (level, columns)
+
+	return []
 
 ##	Acquire the file path
 #	@param level Current user level
@@ -61,20 +63,6 @@ def get_file_path (level):
 								+ '.html')
 
 	return file_path
-
-##	Characterization of data columns for the current level
-#	@param file_path The source file path
-#	@param level Current user level
-#	@return Matching columns
-def get_columns (file_path, level):
-	if level <= max_amount:
-		soup = BeautifulSoup (open (file_path, encoding='utf-8'), "html.parser")	
-		
-		table = soup.find ("table", attrs = {'class': 'topwords'})
-		
-		columns = table.find_all("td")
-
-		return columns
 
 ##	Acquisition of data on the word of the current level
 #	and known columns
