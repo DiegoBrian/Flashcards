@@ -34,7 +34,7 @@ def index (request):
 def get_url_video (sentence):
 	url_video = 'http://localhost:8000/static/video/' + sentence + '.mp4'
 
-	print ("URL: " + str(url_video))
+	#print ("URL: " + str(url_video))
 
 	return url_video
 
