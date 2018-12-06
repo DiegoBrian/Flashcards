@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['update_5ftime',['update_time',['../da/d26/namespacelanguage_1_1views__common.html#a70264f657368775c36b3cfb013eae55a',1,'language::views_common']]],
-  ['urls_2epy',['urls.py',['../dd/da8/chinese_2urls_8py.html',1,'(Global Namespace)'],['../d6/de0/russian_2urls_8py.html',1,'(Global Namespace)']]]
+  ['version_2epy',['version.py',['../d3/d81/chinese_2templatetags_2version_8py.html',1,'(Global Namespace)'],['../de/da0/russian_2templatetags_2version_8py.html',1,'(Global Namespace)']]],
+  ['views_2epy',['views.py',['../db/d1e/views_8py.html',1,'']]],
+  ['views_5fcommon_2epy',['views_common.py',['../d9/dea/views__common_8py.html',1,'']]]
 ];

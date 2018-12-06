@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['version_2epy',['version.py',['../d3/d81/chinese_2templatetags_2version_8py.html',1,'(Global Namespace)'],['../de/da0/russian_2templatetags_2version_8py.html',1,'(Global Namespace)']]],
-  ['views_2epy',['views.py',['../db/d1e/views_8py.html',1,'']]],
-  ['views_5fcommon_2epy',['views_common.py',['../d9/dea/views__common_8py.html',1,'']]]
+  ['words_2epy',['words.py',['../d2/d8c/words_8py.html',1,'']]],
+  ['words_5fstep',['words_step',['../df/d2b/namespacerussian_1_1words.html#a1bc08caf2193001be5489a3b4bbdd449',1,'russian::words']]]
 ];

@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['expressions',['expressions',['../dc/d6f/namespacerussian_1_1expressions.html',1,'russian']]],
-  ['russian',['russian',['../da/db7/namespacerussian.html',1,'']]],
-  ['teste',['teste',['../df/dfa/namespacerussian_1_1teste.html',1,'russian']]],
-  ['tests',['tests',['../d1/d1f/namespacerussian_1_1tests.html',1,'russian']]],
-  ['words',['words',['../df/d2b/namespacerussian_1_1words.html',1,'russian']]]
+  ['std_5fstep',['std_step',['../da/d26/namespacelanguage_1_1views__common.html#ad0d0f18b57d24d3a3dd8f918ac1a8e01',1,'language::views_common']]]
 ];

@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['ok',['ok',['../d1/d0f/namespacechinese_1_1views.html#abb4d876d6d715e6f700291dfd3e3e0f4',1,'chinese.views.ok()'],['../dc/d6f/namespacerussian_1_1expressions.html#a31889e2ab60b746166ef3a743acee8f4',1,'russian.expressions.ok()'],['../df/d2b/namespacerussian_1_1words.html#aefcd1f961aa3efeb6e308e76c58e2f1e',1,'russian.words.ok()']]]
+  ['expressions',['expressions',['../dc/d6f/namespacerussian_1_1expressions.html',1,'russian']]],
+  ['russian',['russian',['../da/db7/namespacerussian.html',1,'']]],
+  ['teste',['teste',['../df/dfa/namespacerussian_1_1teste.html',1,'russian']]],
+  ['tests',['tests',['../d1/d1f/namespacerussian_1_1tests.html',1,'russian']]],
+  ['words',['words',['../df/d2b/namespacerussian_1_1words.html',1,'russian']]]
 ];

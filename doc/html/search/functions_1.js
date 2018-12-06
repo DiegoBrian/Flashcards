@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['delete_5fall',['delete_all',['../dc/d6f/namespacerussian_1_1expressions.html#ac15ca214e26cf77467091c3345d01adc',1,'russian::expressions']]]
+  ['filter_5fcyrillic',['filter_cyrillic',['../df/d2b/namespacerussian_1_1words.html#af209b688320880775e71f65eaf430c5a',1,'russian::words']]]
 ];
