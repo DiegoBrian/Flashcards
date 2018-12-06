@@ -3,29 +3,27 @@
 {% load version %}	
 
 {% block content %}
-    {% for item in soup %}
 	<div class="card">
         <div class="card-body back">
-        	<h1>{{item.0}} {{item.1}}</h1>
-            <div>Transliteration: {{item.2}}<br>Equivalence in English: {{item.3}}</div>
-            <audio class="sound" src="{{item.4}}">
+        	<h1>{{ soup.number }} {{ soup.expression }}</h1>
+            <div>Transliteration: {{ soup.transliteration }}<br>Equivalence in English: {{ soup.english }}</div>
+            <audio class="sound" src="{{ soup.audio }}">
         		Your browser does not support the <code>audio</code> element.
     		</audio>
     		<div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
-            <a href="{% url 'expression_hard' expression_number=item.0|to_int current_box=current_box %}">Again (<{{current_box|add:"-1"|time}})</a>
+            <a href="{% url 'expression_hard' number=soup.number|to_int current_box=current_box %}">Again (<{{ current_box|add:"-1"|time }})</a>
             {% if current_box != 10 and current_box != 0 %}
-            <a href="{% url 'expression_ok' expression_number=item.0|to_int current_box=current_box %}">Good (<{{current_box|time}})</a>
+            <a href="{% url 'expression_ok' number=soup.number|to_int current_box=current_box %}">Good (<{{ current_box|time }})</a>
             {% endif %} 
-            <a href="{% url 'expression_easy' expression_number=item.0|to_int current_box=current_box %}">Easy (<{{current_box|add:"1"|time}})</a>
+            <a href="{% url 'expression_easy' number=soup.number|to_int current_box=current_box %}">Easy (<{{ current_box|add:"1"|time }})</a>
         </div>
         <div class="card-body front">
         	<button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
-        	<h1>{{item.0}} {{item.1}}</h1>
-            <audio class="sound" src="{{item.4}}">
+        	<h1>{{  soup.number  }} {{ soup.expression }}</h1>
+            <audio class="sound" src="{{ soup.audio }}">
                 Your browser does not support the <code>audio</code> element.
             </audio>
             <div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
         </div>
     </div>
-	{% endfor %}
 {% endblock %}

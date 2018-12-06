@@ -81,20 +81,6 @@ def get_current_box (data_bases, user, level):
 
 	return current_box
 
-##	Characterization of data columns for the current level
-#	@param file_path The source file path
-#	@param level Current user level
-#	@return Matching columns
-def get_columns (file_path, level):
-	soup = BeautifulSoup (open (file_path, encoding='utf-8'), "html.parser")	
-	
-	table = soup.find ("table", attrs = {'class': 'topwords'})
-	
-	columns = table.find_all("td")
-
-	return columns
-
-
 ##	Add a level to the user
 #	@param data_bases Databases for a specific language
 #	@param user Current platform user
