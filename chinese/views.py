@@ -11,7 +11,7 @@ def index (request):
 
 	level = get_level (data_bases, request.user)
 
-	print("Level: " + str(level))
+	#print("Level: " + str(level))
 
 	sentence = Sentence.find (level)
 
@@ -34,7 +34,7 @@ def index (request):
 def get_url_video (sentence):
 	url_video = 'http://localhost:8000/static/video/' + sentence + '.mp4'
 
-	print ("URL: " + str(url_video))
+	#print ("URL: " + str(url_video))
 
 	return url_video
 

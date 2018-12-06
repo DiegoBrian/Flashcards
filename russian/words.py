@@ -16,7 +16,7 @@ def index (request):
 
 	level = get_level (data_bases, request.user)
 
-	print("User level: " + str(level))
+	#print("User level: " + str(level))
 	
 	scraping = get_scraping (level)
 	

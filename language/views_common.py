@@ -77,7 +77,7 @@ def get_amount_total (data_bases):
 def get_current_box (data_bases, user, level):
 	current_box = data_bases['user'].find(user, level).box
 
-	print("Current box: " + str(current_box))
+	#print("Current box: " + str(current_box))
 
 	return current_box
 
