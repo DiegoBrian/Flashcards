@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Russian Flashcards</title>
+    <title>{{title}} Flashcards</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/russian.css' %}" />
@@ -28,7 +28,8 @@
     </nav>
 
 
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 
 
     <script type="text/javascript" src="{% static 'js/russian.js' %}">  </script>

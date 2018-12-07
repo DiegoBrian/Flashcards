@@ -1,107 +1,105 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-import datetime
+from language.views_common import * 
 from chinese.models import *
-from django.utils import timezone
-import math
-import os
 
-time = [datetime.timedelta(0, 5), 
-		datetime.timedelta(0, 25), 
-		datetime.timedelta(0, 120), 
-		datetime.timedelta(0, 600), 
-		datetime.timedelta(0, 3600), 
-		datetime.timedelta(0, 18000), 
-		datetime.timedelta(1), 
-		datetime.timedelta(5), 
-		datetime.timedelta(25),
-		datetime.timedelta(120),
-		datetime.timedelta(365)]
 
 @login_required
 def index (request):
-	level = controller (request.user)
+	data_bases = {
+		'user': User_Sentence,
+		'specific': Sentence
+	}
 
-	print(level)
+	level = get_level (data_bases, request.user)
 
-	sentence = Sentence.objects.get(number = level)
+	#print("Level: " + str(level))
 
-	current = User_Sentence.objects.get(user = request.user, sentence_number = level)
+	sentence = Sentence.find (level)
+
+	current_box = get_current_box (data_bases, request.user, level)
+
+	video = get_url_video (sentence.sentence)
 
 	context = {
+		'title': "Chinese",
 		'sentence' : sentence,
-		'current_box' : current.box,
-		'video' : get_video_source(sentence.sentence)
+		'current_box' : current_box,
+		'video' : video
 	}
 
 	return render(request, 'index.html', context)
 
-def get_video_source(sentence):
-	return 'http://localhost:8000/static/video/'+sentence+'.mp4'
+##	Acquire the video URL
+#	@param sentence Video's characteristic sentence, in chinese
+#	@return The video URL
+def get_url_video (sentence):
+	url_video = 'http://localhost:8000/static/video/' + sentence + '.mp4'
 
-def controller (user):
-	relationship = User_Sentence.objects.filter(user = user)
-	if not relationship:
-		User_Sentence.objects.create(user = user, sentence_number = 1, time = datetime.datetime.now() - datetime.timedelta(days=1))
+	#print ("URL: " + str(url_video))
 
-	relationship = User_Sentence.objects.filter(user = user).order_by('time')
+	return url_video
 
-	if relationship[0].time <= timezone.now():
-		level = relationship[0].sentence_number
-	else:
-		level = get_level(user)+1
-		number_of_words = Sentence.objects.all().count()
-		if(level > number_of_words):
-			level = relationship[0].sentence_number	
-		else:
-			User_Sentence.objects.create(user = user, sentence_number = level, time = datetime.datetime.now() - datetime.timedelta(days=1))
-		
-	return level
-
-
-def get_level (user):
-	relationship = User_Sentence.objects.filter(user = user).order_by('-sentence_number')
-	return relationship[0].sentence_number
-
-
+##	Rule for the choice of low difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
-def easy (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	if current_box == 10:
-		relationship.time = timezone.now() + time[current_box]
-	else:
-		new_box = current_box+1
-		relationship.time = timezone.now() + time[new_box]
-		print("new_box: "+str(new_box))
-		relationship.box = new_box
-		relationship.save()
-	print(relationship.time)
-	relationship.save()
+def easy (request, number, current_box):
+	data_bases = {
+		'user': User_Sentence
+	}
+
+	user_data = {
+		'user': request.user,
+		'next_level': number,
+		'current_box': current_box
+	}
+
+	easy_common (data_bases, user_data)
+
 	return redirect('chinese_index')
 
-
+##	Rule for the choice of medium difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
-def ok (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	relationship.time = timezone.now() + time[current_box]
-	print(relationship.time)
-	relationship.save()
+def ok (request, number, current_box):
+	data_bases = {
+		'user': User_Sentence
+	}
+
+	user_data = {
+		'user': request.user,
+		'next_level': number,
+		'current_box': current_box
+	}
+
+	medium_common (data_bases, user_data)
+
 	return redirect('chinese_index')
 
-
+##	Rule for the choice of medium difficulty
+#	@brief It demands user login
+#	@param request Standard Django request
+#	@param number Current user level
+#	@param current_box	Current user context
+#	@return Next page with a new word
 @login_required
-def hard (request, sentence_number, current_box):
-	relationship =  User_Sentence.objects.get(user = request.user, sentence_number=sentence_number)
-	print(relationship.time)
-	if current_box == 0:
-		relationship.time = timezone.now() + time[current_box]
-	else:
-		new_box = current_box-1
-		relationship.time = timezone.now() + time[new_box]
-		relationship.box = new_box
-		relationship.save()
-	print(relationship.time)
-	relationship.save()
+def hard (request, number, current_box):
+	data_bases = {
+		'user': User_Sentence
+	}
+
+	user_data = {
+		'user': request.user,
+		'next_level': number,
+		'current_box': current_box
+	}
+
+	hard_common (data_bases, user_data)
+
 	return redirect('chinese_index')
