@@ -16,7 +16,7 @@ $(".audio").on("click",function(){
 
 $("#btn-front").on("click", function(){
 	$(this).closest(".card").flip(true);
-	alert("front");
+	//alert("front");
 });
 
 $("#btn-back").on("click",function(){
@@ -29,18 +29,18 @@ $("#btn-back").on("click",function(){
 	$("div .back").hide();
 	$("#front").show();
 	//*/
-	alert("back");
+	//alert("back");
 });
 
 
 $("#flipper").on("click", function flip() {
 	$('#flip-ex').toggleClass('flipped');
-	$('#bEasy').hide();
+	//$('#bEasy').hide();
 	if (!$('#flip-ex').hasClass('flipped')){
 		if(!sumir){
 			$('#sumir-fst').show();
 			$('#sumir-snd').hide();
-			$('#bGood').hide();
+			//$('#bGood').hide();
 			$('#flipper').hide();
 		}else{
 			$('#sumir-fst').hide();

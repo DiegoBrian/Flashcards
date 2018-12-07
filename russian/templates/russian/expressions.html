@@ -11,11 +11,15 @@
         		Your browser does not support the <code>audio</code> element.
     		</audio>
     		<div><img class="audio" src="https://image.freepik.com/free-icon/audio-volume_318-69577.jpg"></div>
-            <a href="{% url 'expression_hard' number=soup.number|to_int current_box=current_box %}">Again (<{{ current_box|add:"-1"|time }})</a>
-            {% if current_box != 10 and current_box != 0 %}
-            <a href="{% url 'expression_ok' number=soup.number|to_int current_box=current_box %}">Good (<{{ current_box|time }})</a>
-            {% endif %} 
-            <a href="{% url 'expression_easy' number=soup.number|to_int current_box=current_box %}">Easy (<{{ current_box|add:"1"|time }})</a>
+            
+            
+            <a class="btn btn-danger" href="{% url 'expression_hard' number=soup.number|to_int current_box=current_box %}" role="button">Hard</a>
+
+            <a class="btn btn-warning" href="{% url 'expression_ok' number=soup.number|to_int current_box=current_box %}" role="button">Good</a>
+            
+            <a class="btn btn-success" href="{% url 'expression_easy' number=soup.number|to_int current_box=current_box %}" role="button">Easy</a>
+
+
         </div>
         <div class="card-body front">
         	<button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
