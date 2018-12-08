@@ -26,12 +26,7 @@ class User_Sentence(models.Model):
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
 
-	def create (user, time):
-		User_Sentence.objects.create(user = user,
-									number = 1,
-									time = time)
-	
-	def create (user, time, number):
+	def create (user, time, number = 1):
 		User_Sentence.objects.create(user = user,
 									number = number,
 									time = time)

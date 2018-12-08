@@ -33,24 +33,28 @@
 		</div>
 
 		<a	class="btn btn-danger" role="button" id="bHard"
-			href="{% url 'sentence_hard' number=sentence.number current_box=current_box %}" >
-			Hard <br> (< {{ current_box| add:"-1" | time }} )
+			href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
+			Hard <br> (< {{ next_levels.hard | time }} )
 		</a>
 
 		<a class="btn btn-warning" role="button" id="bGood"
-			href="{% url 'sentence_ok' number=sentence.number current_box=current_box %}" >
-			Good <br> (< {{ current_box | time }})
+			href="{% url 'sentence_ok' number=sentence.number current_box=next_levels.medium %}" >
+			Good <br> (< {{ next_levels.medium | time }} )
 		</a>
 		
 		<a class="btn btn-success" role="button" id="bEasy"
-			href="{% url 'sentence_easy' number=sentence.number current_box=current_box %}" >
-			Easy <br> (< {{ current_box | add:easy_step | time }})
+			href="{% url 'sentence_easy' number=sentence.number current_box=next_levels.easy %}" >
+			Easy <br> (< {{ next_levels.easy | time }} )
 		</a>
 
 		<button class="btn btn-primary flip-btn" id="flipper" style="display: block">Flip</button>
 
 	</div>
 
-	Current_box = {{ current_box }}
-	Easy_step = {{ easy_step }}
+	<!--
+	Current_box = {{ current_box }} <br>
+	Easy = {{ next_levels.easy }} <br>
+	Medium = {{ next_levels.medium }} <br>
+	Hard = {{ next_levels.hard }} <br>
+	-->
 {% endblock %}

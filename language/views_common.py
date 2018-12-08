@@ -165,12 +165,16 @@ def hard_common (data_bases, user_data):
 
 	relationship.box = next_level
 
+	'''
 	print("")
 	print("Current box:	" + str(relationship.box))
 	print ("Current hard Time: " + str(relationship.time))
+	'''
 	relationship.time = update_time(current_box)
+	'''
 	print ("New hard Time:     " + str(relationship.time))
 	print("")
+	'''
 	relationship.save()
 
 	return
@@ -246,10 +250,12 @@ def get_hard_step (current_box):
 	return step
 
 def get_next_levels (current_box):
+	'''
 	print("")
 	print("Current-box to next levels")
 	print(str(current_box))
 	print("")
+	'''
 
 	step = get_easy_step (current_box)
 	next_easy = current_box + step
