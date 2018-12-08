@@ -13,7 +13,8 @@ import humanfriendly
 ##	@var time_step
 #	Standard time steps
 time_step = [	datetime.timedelta(0, 15), 
-				datetime.timedelta(0, 50),
+				datetime.timedelta(0, 30),
+				datetime.timedelta(0, 60),
 				datetime.timedelta(0, 120), 
 				datetime.timedelta(0, 600), 
 				datetime.timedelta(0, 3600), 
@@ -34,10 +35,19 @@ max_box		= 10
 min_box 	= 0
 ##	@var extr_step
 #	Time step for extreme ease
-extr_step 	= 6
+extr_step 	= 5
 ##	@var std_step
 #	Standard time step
 std_step 	= 1
+
+LINUX = "Linux"
+
+def get_slash():
+	if os.uname().sysname == LINUX:
+		return '/'
+	else:
+		return '\\'
+
 
 ##	Acquisition of the user level
 #	@param data_bases Databases for a specific language
@@ -151,11 +161,9 @@ def hard_common (data_bases, user_data):
 
 	relationship =  db.find(user, next_level)
 
-	if current_box > min_box:
-		current_box = current_box - std_step
-		relationship.box = current_box
-	elif current_box < min_box:
-		current_box = min_box
+	#relationship.box = current_box + get_hard_step(current_box)
+
+	relationship.box = next_level
 
 	print("")
 	print("Current box:	" + str(relationship.box))
@@ -175,6 +183,11 @@ def yesterday():
 #	@param current_box Current context 
 #	@return Time updated
 def update_time(current_box):
+	'''
+	print("")
+	print("Vai acrescentar: " + str_time(time_step[current_box]))
+	print("")
+	'''
 	return timezone.now() + time_step[current_box]
 
 def str_time (time):
@@ -198,12 +211,12 @@ def str_time (time):
 
 def check_time_step():
 	print ("")
+	i = 0
 	for time in time_step:
 		time_str = str_time(time)
-		print("Tempo: " + time_str)
+		print("Tempo[" + str(i) + "]: " + time_str)
+		i = i + 1
 	print ("")
-
-
 
 
 def get_easy_step (current_box):
@@ -213,3 +226,44 @@ def get_easy_step (current_box):
 		step = std_step
 
 	return step
+
+def get_medium_step (current_box):
+	default_step = 2 * std_step
+
+	if current_box == min_box:
+		step = default_step
+	else:
+		step = 0
+
+	return step
+
+def get_hard_step (current_box):
+	if current_box - std_step >= min_box:
+		step = - std_step
+	else:
+		step = 0
+	
+	return step
+
+def get_next_levels (current_box):
+	print("")
+	print("Current-box to next levels")
+	print(str(current_box))
+	print("")
+
+	step = get_easy_step (current_box)
+	next_easy = current_box + step
+
+	step = get_medium_step (current_box)
+	next_medium = current_box + step
+
+	step = get_hard_step (current_box)
+	next_hard = current_box + step
+
+	next_levels = {
+		'easy':		next_easy,
+		'medium':	next_medium,
+		'hard':		next_hard
+	}
+
+	return next_levels

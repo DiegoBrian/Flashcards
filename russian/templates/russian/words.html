@@ -31,18 +31,22 @@
 
             <br>
 
-            <a class="btn btn-danger" href="{% url 'word_hard' number=soup.number|to_int current_box=current_box %}" role="button">Hard <br> (< {{ current_box| add:"-1" | time }} )</a>
+            <a class="btn btn-danger" href="{% url 'word_hard' number=soup.number|to_int current_box=next_levels.hard %}" role="button">Hard <br> (< {{ next_levels.hard | time }} )</a>
 
-            <a class="btn btn-warning" href="{% url 'word_ok' number=soup.number|to_int current_box=current_box %}" role="button">Good <br> (< {{ current_box | time }})</a>
+            <a class="btn btn-warning" href="{% url 'word_ok' number=soup.number|to_int current_box=next_levels.medium %}" role="button">Good <br> (< {{ next_levels.medium | time }})</a>
             
-            <a class="btn btn-success" href="{% url 'word_easy' number=soup.number|to_int current_box=current_box %}" role="button">Easy <br> (< {{ current_box | add:easy_step | time }})</a>
+            <a class="btn btn-success" href="{% url 'word_easy' number=soup.number|to_int current_box=next_levels.easy %}" role="button">Easy <br> (< {{ next_levels.easy | time }})</a>
 
             <br>
 
 
         </div>
 
-        Current_box = {{ current_box }}
-        Easy_step = {{ easy_step }}
+        <!--
+        Current_box = {{ current_box }} <br>
+        Easy = {{ next_levels.easy }} <br>
+        Medium = {{ next_levels.medium }} <br>
+        Hard = {{ next_levels.hard }} <br>
+        -->
     </div>
 {% endblock %}
