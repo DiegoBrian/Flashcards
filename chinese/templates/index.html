@@ -34,20 +34,23 @@
 
 		<a	class="btn btn-danger" role="button" id="bHard"
 			href="{% url 'sentence_hard' number=sentence.number current_box=current_box %}" >
-			Hard
+			Hard <br> (< {{ current_box| add:"-1" | time }} )
 		</a>
 
 		<a class="btn btn-warning" role="button" id="bGood"
 			href="{% url 'sentence_ok' number=sentence.number current_box=current_box %}" >
-			Good
+			Good <br> (< {{ current_box | time }})
 		</a>
 		
 		<a class="btn btn-success" role="button" id="bEasy"
 			href="{% url 'sentence_easy' number=sentence.number current_box=current_box %}" >
-			Easy
+			Easy <br> (< {{ current_box | add:easy_step | time }})
 		</a>
 
 		<button class="btn btn-primary flip-btn" id="flipper" style="display: block">Flip</button>
 
 	</div>
+
+	Current_box = {{ current_box }}
+	Easy_step = {{ easy_step }}
 {% endblock %}

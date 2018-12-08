@@ -19,11 +19,14 @@ def index (request):
 
 	video = get_url_video (sentence.sentence)
 
+	easy_step = get_easy_step (current_box)
+
 	context = {
 		'title': "Chinese",
 		'sentence' : sentence,
 		'current_box' : current_box,
-		'video' : video
+		'video' : video,
+		'easy_step': easy_step
 	}
 
 	return render(request, 'index.html', context)

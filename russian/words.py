@@ -10,22 +10,27 @@ words_step = 50
 
 @login_required
 def index (request):
+	check_time_step()
+
 	data_bases = {
 		'user': User_Word
 	}
 
 	level = get_level (data_bases, request.user)
 
-	#print("User level: " + str(level))
+	print("User level: " + str(level))
 	
 	scraping = get_scraping (level)
 	
 	current_box = get_current_box (data_bases, request.user, level)
 
+	easy_step = get_easy_step (current_box)
+
 	context = {
 		'title': "Russian",
 		'soup' : scraping,
-		'current_box' : current_box
+		'current_box' : current_box,
+		'easy_step': easy_step
 	}
 		
 	return render(request, 'russian/words.html', context)

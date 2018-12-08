@@ -8,20 +8,21 @@ from bs4 import BeautifulSoup
 import datetime
 import math
 import os
+import humanfriendly
 
 ##	@var time_step
 #	Standard time steps
-time_step = [datetime.timedelta(0, 5), 
-			datetime.timedelta(0, 25), 
-			datetime.timedelta(0, 120), 
-			datetime.timedelta(0, 600), 
-			datetime.timedelta(0, 3600), 
-			datetime.timedelta(0, 18000), 
-			datetime.timedelta(1), 
-			datetime.timedelta(5), 
-			datetime.timedelta(25),
-			datetime.timedelta(120),
-			datetime.timedelta(365)]
+time_step = [	datetime.timedelta(0, 15), 
+				datetime.timedelta(0, 50),
+				datetime.timedelta(0, 120), 
+				datetime.timedelta(0, 600), 
+				datetime.timedelta(0, 3600), 
+				datetime.timedelta(0, 18000), 
+				datetime.timedelta(1), 
+				datetime.timedelta(5), 
+				datetime.timedelta(25),
+				datetime.timedelta(120),
+				datetime.timedelta(365)]
 ##	@var max_amount 
 #	Maximum capacity of snippets of languages, whether words, expressions or sentences
 max_amount	= 300
@@ -101,16 +102,18 @@ def easy_common (data_bases, user_data):
 	relationship = db.find(user, next_level)
 
 	if current_box != max_box:
-		if current_box == min_box:
-			step = extr_step
-		else:
-			step = std_step
+		step = get_easy_step(current_box)
 
 		current_box = current_box + step
 		
 		relationship.box = current_box
 
-	relationship.time = update_time (current_box)
+	print("")
+	print("Current box:	" + str(relationship.box))
+	print ("Current easy Time: " + str(relationship.time))
+	relationship.time = update_time(current_box)
+	print ("New easy Time:     " + str(relationship.time))
+	print("")
 	relationship.save()
 
 	return
@@ -126,7 +129,12 @@ def medium_common (data_bases, user_data):
 	current_box = user_data['current_box']
 
 	relationship =  db.find(user, next_level)
+	print("")
+	print("Current box:	" + str(relationship.box))
+	print ("Current medium Time: " + str(relationship.time))
 	relationship.time = update_time(current_box)
+	print ("New medium Time:     " + str(relationship.time))
+	print("")
 	relationship.save()
 
 	return
@@ -149,7 +157,12 @@ def hard_common (data_bases, user_data):
 	elif current_box < min_box:
 		current_box = min_box
 
+	print("")
+	print("Current box:	" + str(relationship.box))
+	print ("Current hard Time: " + str(relationship.time))
 	relationship.time = update_time(current_box)
+	print ("New hard Time:     " + str(relationship.time))
+	print("")
 	relationship.save()
 
 	return
@@ -164,3 +177,39 @@ def yesterday():
 def update_time(current_box):
 	return timezone.now() + time_step[current_box]
 
+def str_time (time):
+	str_time = humanfriendly.format_timespan(time)
+	str_time = str_time.replace("seconds", "seg")
+	str_time = str_time.replace("minutes", "min")
+	str_time = str_time.replace("minute", "min")
+	str_time = str_time.replace("hours", "hr")
+	str_time = str_time.replace("hour", "hr")
+	str_time = str_time.replace("days", "dy")
+	str_time = str_time.replace("day", "dy")
+	str_time = str_time.replace("weeks", "w")
+	str_time = str_time.replace("week", "w")
+	str_time = str_time.replace("months", "m")
+	str_time = str_time.replace("month", "m")
+	str_time = str_time.replace("years", "y")
+	str_time = str_time.replace("year", "y")
+	str_time = str_time.replace(" and", ",")
+
+	return str_time
+
+def check_time_step():
+	print ("")
+	for time in time_step:
+		time_str = str_time(time)
+		print("Tempo: " + time_str)
+	print ("")
+
+
+
+
+def get_easy_step (current_box):
+	if current_box == min_box:
+		step = extr_step
+	else:
+		step = std_step
+
+	return step
