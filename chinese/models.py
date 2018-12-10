@@ -54,3 +54,7 @@ class User_Sentence(models.Model):
 	def get_level (user):
 		relationship = User_Sentence.relationship(user).order_by('-number').first()
 		return relationship.number
+
+class User_TimeSettings (models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	time_settings = models.CharField('Time Settings', max_length=3000, default = '[15, 30, 60, 120, 600, 3600, 18000, 86400, 432000, 2160000, 10368000, 31536000]')
