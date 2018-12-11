@@ -46,26 +46,26 @@ function flipCard(n) {
     facingUp = !facingUp;
 }
 
-$('#flipper_ch').on('click', function(){
-	esconder("flipper_ch");
-	exibir("flipper_pi");
-	exibir("flipper_en");
+$('#flipper_chi_ch').on('click', function(){
+	esconder("flipper_chi_ch");
+	exibir("flipper_chi_pi");
+	exibir("flipper_chi_en");
 
 	flipCard(1);
 });
 
-$('#flipper_pi').on('click', function(){
-	exibir("flipper_ch");
-	esconder("flipper_pi");
-	exibir("flipper_en");
+$('#flipper_chi_pi').on('click', function(){
+	exibir("flipper_chi_ch");
+	esconder("flipper_chi_pi");
+	exibir("flipper_chi_en");
 
 	flipCard(2);
 });
 
-$('#flipper_en').on('click', function(){
-	exibir("flipper_ch");
-	exibir("flipper_pi");
-	esconder("flipper_en");
+$('#flipper_chi_en').on('click', function(){
+	exibir("flipper_chi_ch");
+	exibir("flipper_chi_pi");
+	esconder("flipper_chi_en");
 	
 	flipCard(3);
 });
@@ -76,24 +76,22 @@ $(document).ready(function(){
     var frontContent = $('.store li:first-child').html(); 
 	frontFace.html(frontContent);
 
-	esconder("flipper_ch");
-});
 
-function strID(id){
-	var strID = "'#" + id + "'";
-	return strID;
-}
+	esconder("flipper_chi_ch");
+
+	esconder("flipper_rus_cy");
+});
 
 function exibir(id){
 	var element = document.getElementById(id);
 
-	if(element.hasAttribute("disabled"))
+	if(element && element.hasAttribute("disabled"))
 		element.removeAttribute("disabled");
 }
 
 function esconder(id){
 	var element = document.getElementById(id);
 
-	if(!element.hasAttribute("disabled"))
+	if(element && !element.hasAttribute("disabled"))
 		element.setAttribute("disabled", "disabled");
 }

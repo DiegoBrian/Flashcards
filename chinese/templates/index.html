@@ -3,8 +3,7 @@
 
 {% block content %}
 	<div class="row">
-		
-		<div class="movieArea col-12 col-md-8 bg-light border">
+		<div class="subjectArea col-12 col-md-8 bg-light border">
 			<video class="video" controls>
 				<source src="{{ video }}" type="video/mp4">
 					Your browser does not support the video tag.
@@ -19,12 +18,12 @@
 			
 				<ul class="store my-auto">
 					<li>
-						<div class="content bg-light" id="ch_face">
+						<div class="content bg-light" id="chi_ch_face">
 							{{sentence.sentence|filter_chinese}}
 						</div>
 					</li>
 					<li>
-						<div class="content bg-light" id="pi_face">
+						<div class="content bg-light" id="chi_pi_face">
 							{%if sentence.pinyin %}
 								{{sentence.pinyin}}
 							{% else %}
@@ -33,7 +32,7 @@
 						</div>
 					</li>
 					<li>
-						<div class="content bg-light" id="en_face">
+						<div class="content bg-light" id="chi_en_face">
 							{%if sentence.equivalence %}
 								{{sentence.equivalence}}
 							{% else %}
@@ -47,6 +46,7 @@
 
 		<!-- Painel de controle do usuário -->
 		<div class="col-4 col-md-4 my-auto">
+			<!-- Nível de dificuldade -->
 			<div class="card text-center">
 				<h4 class="card-header">Difficult</h4>
 				<div class="card-body">
@@ -67,23 +67,29 @@
 				</div>
 			</div>
 			
+			<!-- Idioma de exibição -->
 			<div class="card text-center">
 				<h4 class="card-header">Exhibition language</h4>
 				<div class="card-body">
-					<button class="btn btn-primary" id="flipper_ch">
+					<button class="btn btn-primary" id="flipper_chi_ch">
 						Chinese
 					</button>
 					
-					<button class="btn btn-primary" id="flipper_pi">
+					<button class="btn btn-primary" id="flipper_chi_pi">
 						Pinyin
 					</button>
 					
-					<button class="btn btn-primary" id="flipper_en">
+					<button class="btn btn-primary" id="flipper_chi_en">
 						English
 					</button>
 				</div>
 			</div>			
 		</div>
 	</div>
+
+	Current_box = {{ current_box }} <br>
+	Easy = {{ next_levels.easy }} <br>
+	Medium = {{ next_levels.medium }} <br>
+	Hard = {{ next_levels.hard }} <br>
 
 {% endblock %}

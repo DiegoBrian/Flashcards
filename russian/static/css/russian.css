@@ -29,11 +29,11 @@ img {
 	margin-top: 40px;
 }
 
-.movieArea{
+.subjectArea{
     width: 80%;
     border-radius: 40px;
     padding: 1%;
-    margin: .5% auto;
+    margin: auto;
     text-align: center;
 }
 

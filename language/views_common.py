@@ -43,7 +43,7 @@ std_step 	= 1
 LINUX = "Linux"
 
 def get_slash():
-	if os.uname().sysname == LINUX:
+	if hasattr(os, 'uname') and os.uname().sysname == LINUX:
 		return '/'
 	else:
 		return '\\'
@@ -140,6 +140,11 @@ def medium_common (data_bases, user_data):
 
 	relationship =  db.find(user, next_level)
 	print("")
+	print("NExt rec:	" + str(current_box))
+	print("box rec:	" + str(current_box))
+		
+	relationship.box = current_box
+	
 	print("Current box:	" + str(relationship.box))
 	print ("Current medium Time: " + str(relationship.time))
 	relationship.time = update_time(current_box)
@@ -165,16 +170,13 @@ def hard_common (data_bases, user_data):
 
 	relationship.box = next_level
 
-	'''
+	
 	print("")
 	print("Current box:	" + str(relationship.box))
 	print ("Current hard Time: " + str(relationship.time))
-	'''
 	relationship.time = update_time(current_box)
-	'''
 	print ("New hard Time:     " + str(relationship.time))
 	print("")
-	'''
 	relationship.save()
 
 	return
@@ -187,11 +189,10 @@ def yesterday():
 #	@param current_box Current context 
 #	@return Time updated
 def update_time(current_box):
-	'''
+	
 	print("")
 	print("Vai acrescentar: " + str_time(time_step[current_box]))
 	print("")
-	'''
 	return timezone.now() + time_step[current_box]
 
 def str_time (time):
@@ -237,7 +238,7 @@ def get_medium_step (current_box):
 	if current_box == min_box:
 		step = default_step
 	else:
-		step = 0
+		step = std_step
 
 	return step
 

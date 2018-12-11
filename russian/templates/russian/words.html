@@ -1,8 +1,9 @@
 {% extends "russian/base.html" %}
 {% load static %}
-<!--s{% load version %}-->
+<{% load version %}
 
 {% block content %}
+    <!--
 	<div class="card">
         <div class="card-body front">
             <button class="btn btn-primary flip-btn" id="btn-front">Flip card</button>
@@ -18,7 +19,7 @@
             
             <div>
                 <h4>{{soup.english}}</h4>
-                <!--{{soup.function}}-->
+                <!--{{soup.function}}--
             </div>
 
             <audio class="sound" src="{{soup.audio}}">
@@ -47,6 +48,91 @@
         Easy = {{ next_levels.easy }} <br>
         Medium = {{ next_levels.medium }} <br>
         Hard = {{ next_levels.hard }} <br>
-        -->
+        --
+    </div>
+    -->
+
+    <div class="row">
+        <div class="subjectArea col-12 col-md-8 bg-light border">
+            <!-- Legendas -->
+            <div class="flipArea">
+                <div class="flip">
+                    <div class="face face1"></div>
+                    <div class="face face2"></div>
+                </div>
+            
+                <ul class="store">
+                    <li>
+                        <div class="content bg-light" id="rus_cy_face">
+                            {{ soup.cyrillic }}
+                        </div>
+                    </li>
+                    <li>
+                        <div class="content bg-light" id="rus_en_face">
+                            {%if soup.english %}
+                                {{ soup.english }}
+                            {% else %}
+                                <i>"English"</i>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li>
+                        <div class="content bg-light" id="rus_fn_face">
+                            {%if soup.function %}
+                                {{ soup.function }}
+                            {% else %}
+                                <i>"Function"</i>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <audio class="sound" src="{{ soup.audio }}" controls>
+                Your browser does not support the <code>audio</code> element.
+            </audio>
+        </div>
+
+        <!-- Painel de controle do usuário -->
+		<div class="col-4 col-md-4 my-auto">
+            <!-- Nível de dificuldade -->
+            <div class="card text-center">
+                <h4 class="card-header">Difficult</h4>
+                <div class="card-body">
+                    <a	class="btn btn-danger" role="button" id="bHard"
+                        href="{% url 'word_hard' number=soup.number|to_int current_box=next_levels.hard %}" >
+                        High <br> ({{ next_levels.hard | time }})
+                    </a>
+                    
+                    <a class="btn btn-warning" role="button" id="bGood"
+                        href="{% url 'word_ok' number=soup.number|to_int current_box=next_levels.medium %}" >
+                        Medium <br> ({{ next_levels.medium | time }})
+                    </a>
+                    
+                    <a class="btn btn-success" role="button" id="bEasy"
+                        href="{% url 'word_easy' number=soup.number|to_int current_box=next_levels.easy %}" >
+                        Low <br> ({{ next_levels.easy | time }})
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Idioma de exibição -->
+            <div class="card text-center">
+                <h4 class="card-header">Exhibition language</h4>
+                <div class="card-body">
+                    <button class="btn btn-primary" id="flipper_rus_cy">
+                        Cyrillic
+                    </button>
+                    
+                    <button class="btn btn-primary" id="flipper_rus_en">
+                        English
+                    </button>
+                    
+                    <button class="btn btn-primary" id="flipper_rus_fn">
+                        Function
+                    </button>
+                </div>
+            </div>			
+        </div>
     </div>
 {% endblock %}
