@@ -1,5 +1,5 @@
 from django import template
-from language.views_common import str_time, time_step
+from language.views_common import str_time, get_time_step, set_time_step
 
 register = template.Library()
 
@@ -12,7 +12,7 @@ def to_int(value):
 
 
 @register.filter()
-def time(current_box):
+def time(current_box, user):
 	if current_box > 10:
 		pos = 10
 	elif current_box <0:
@@ -20,5 +20,7 @@ def time(current_box):
 	else:
 		pos = current_box
 	
+	time_step = get_time_step(user)
+
 	return str_time(time_step[pos])
 

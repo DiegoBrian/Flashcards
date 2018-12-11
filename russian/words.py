@@ -18,7 +18,7 @@ def index (request):
 
 	print("User level: " + str(level))
 
-	check_time_step()
+	check_time_step(request.user)
 	
 	scraping = get_scraping (level)
 	

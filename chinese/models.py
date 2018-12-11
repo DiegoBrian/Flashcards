@@ -1,6 +1,11 @@
 from django.db import models
 from django.conf import settings
-from language.views_common import yesterday
+#from language.views_common import yesterday
+import datetime
+
+##	Acquisition of yesterday, correctly
+def yesterday():	
+	return datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class Sentence(models.Model):
 	number = models.IntegerField('Number', default=0, blank= True, null=True)

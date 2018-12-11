@@ -31,11 +31,11 @@
 
             <br>
 
-            <a class="btn btn-danger" href="{% url 'word_hard' number=soup.number|to_int current_box=next_levels.hard %}" role="button">Hard <br> (< {{ next_levels.hard | time }} )</a>
+            <a class="btn btn-danger" href="{% url 'word_hard' number=soup.number|to_int current_box=next_levels.hard %}" role="button">Hard <br> (< {{ next_levels.hard | time:user }} )</a>
 
-            <a class="btn btn-warning" href="{% url 'word_ok' number=soup.number|to_int current_box=next_levels.medium %}" role="button">Good <br> (< {{ next_levels.medium | time }})</a>
+            <a class="btn btn-warning" href="{% url 'word_ok' number=soup.number|to_int current_box=next_levels.medium %}" role="button">Good <br> (< {{ next_levels.medium | time:user }})</a>
             
-            <a class="btn btn-success" href="{% url 'word_easy' number=soup.number|to_int current_box=next_levels.easy %}" role="button">Easy <br> (< {{ next_levels.easy | time }})</a>
+            <a class="btn btn-success" href="{% url 'word_easy' number=soup.number|to_int current_box=next_levels.easy %}" role="button">Easy <br> (< {{ next_levels.easy | time:user }})</a>
 
             <br>
 

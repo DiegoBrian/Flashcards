@@ -34,17 +34,17 @@
 
 		<a	class="btn btn-danger" role="button" id="bHard"
 			href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
-			Hard <br> (< {{ next_levels.hard | time }} )
+			Hard <br> (< {{ next_levels.hard | time:user }} )
 		</a>
 
 		<a class="btn btn-warning" role="button" id="bGood"
 			href="{% url 'sentence_ok' number=sentence.number current_box=next_levels.medium %}" >
-			Good <br> (< {{ next_levels.medium | time }} )
+			Good <br> (< {{ next_levels.medium | time:user }} )
 		</a>
 		
 		<a class="btn btn-success" role="button" id="bEasy"
 			href="{% url 'sentence_easy' number=sentence.number current_box=next_levels.easy %}" >
-			Easy <br> (< {{ next_levels.easy | time }} )
+			Easy <br> (< {{ next_levels.easy | time:user }} )
 		</a>
 
 		<button class="btn btn-primary flip-btn" id="flipper" style="display: block">Flip</button>

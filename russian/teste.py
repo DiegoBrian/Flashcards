@@ -69,25 +69,3 @@ def convert_delta (time_number, time_select):
 		elif time_select == 'year':
 			return datetime.timedelta(time_number*365)
 
-def get_time_step(user):
-	settings = User_TimeSettings.objects.get(user = user)
-
-	time_settings_float = json.loads(settings.time_settings)
-
-	time_settings = []
-
-	for time in time_settings_float:
-		time_settings.append(datetime.timedelta(time/86400))
-
-	return time_settings
-
-
-
-def set_time_step(user, time_step):
-	time_step_json = []
-
-	for time in time_step:
-		date = time.days*86400+time.seconds
-		time_step_json.append(date)
-
-	User_TimeSettings.objects.filter(user = user).update(time_settings = time_step_json)
