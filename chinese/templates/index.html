@@ -48,31 +48,27 @@
 		<!-- Painel de controle do usuário -->
 		<div class="col-4 col-md-4 my-auto">
 			<div class="card text-center">
-				<h4 class="card-header">
-					Difficult
-				</h4>
+				<h4 class="card-header">Difficult</h4>
 				<div class="card-body">
 					<a	class="btn btn-danger" role="button" id="bHard"
 						href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
-						Hard <br> ({{ next_levels.hard | time }})
+						High <br> ({{ next_levels.hard | time }})
 					</a>
 					
 					<a class="btn btn-warning" role="button" id="bGood"
 						href="{% url 'sentence_ok' number=sentence.number current_box=next_levels.medium %}" >
-						Good <br> ({{ next_levels.medium | time }})
+						Medium <br> ({{ next_levels.medium | time }})
 					</a>
 					
 					<a class="btn btn-success" role="button" id="bEasy"
 						href="{% url 'sentence_easy' number=sentence.number current_box=next_levels.easy %}" >
-						Easy <br> ({{ next_levels.easy | time }})
+						Low <br> ({{ next_levels.easy | time }})
 					</a>
 				</div>
 			</div>
 			
 			<div class="card text-center">
-				<h4 class="card-header">
-					Exhibition language
-				</h4>
+				<h4 class="card-header">Exhibition language</h4>
 				<div class="card-body">
 					<button class="btn btn-primary" id="flipper_ch">
 						Chinese
