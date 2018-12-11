@@ -1,0 +1,168 @@
+{% extends 'russian/base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="card">
+        <div class="card-body">
+		    <h1>Set Time Intervals</h1>
+		    Pimsleur's graduated-interval, is a scale designed to help language learning. The content being learned will repeat itself after 5 seconds, then 25 seconds, and then 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months and finally 2 years. The cards in this application follow this interval, taking more or less time to appear after each occurance, depending on the difficulty registered each time. If you click on the "Easy" button, the card will go to the next step of the scale, taking a longer time to repeat itself. If you click on the "Good" button, the card will stay on the same step of the scale that it is in. If you click on the "Hard" button, the card will go to the earlier step of the scale, taking a shorter time to repeat itself. So, if you want to make your learning faster or slower you can change the repetition intervals.
+		    <br>
+		    {{times}}
+		    <br>
+		    <form method="POST">
+		    	{% csrf_token %}
+		    	<div class="form-group">
+			    	<label for="time1number">Interval 1:</label><br>
+			    	<input type="number" name="time1number" id="time1number" required>
+			    	<select name="time1select" id="time1select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+		    	<div class="form-group">
+			    	<label for="time2number">Interval 2:</label><br>
+			    	<input type="number" name="time2number" id="time2number" required>
+			    	<select name="time2select" id="time21select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time3number">Interval 3:</label><br>
+			    	<input type="number" name="time3number" id="time3number" required>
+			    	<select name="time3select" id="time3select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time4number">Interval 4:</label><br>
+			    	<input type="number" name="time4number" id="time4number" required>
+			    	<select name="time4select" id="time4select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time5number">Interval 5:</label><br>
+			    	<input type="number" name="time5number" id="time5number" required>
+			    	<select name="time5select" id="time5select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time6number">Interval 6:</label><br>
+			    	<input type="number" name="time6number" id="time6number" required>
+			    	<select name="time6select" id="time6select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time7number">Interval 7:</label><br>
+			    	<input type="number" name="time7number" id="time7number" required>
+			    	<select name="time7select" id="time7select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time8number">Interval 8:</label><br>
+			    	<input type="number" name="time8number" id="time8number" required>
+			    	<select name="time8select" id="time8select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time9number">Interval 9:</label><br>
+			    	<input type="number" name="time9number" id="time9number" required>
+			    	<select name="time9select" id="time9select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time10number">Interval 10:</label><br>
+			    	<input type="number" name="time10number" id="time10number" required>
+			    	<select name="time10select" id="time10select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<div class="form-group">
+			    	<label for="time11number">Interval 11:</label><br>
+			    	<input type="number" name="time11number" id="time11number" required>
+			    	<select name="time11select" id="time11select">
+			  			<option value="seg">Second(s)</option>
+			  			<option value="min">Minute(s)</option>
+			  			<option value="hour">Hour(s)</option>
+			  			<option value="day">Day(s)</option>
+			  			<option value="week">Week(s)</option>
+			  			<option value="month">Month(s)</option>
+			  			<option value="year">Year(s)</option>
+					</select>
+				</div>
+				<input style="width: 100px;" type="submit" value="Save" name="btnsave" id="btnsave" class="btn btn-dark"/>
+				<input style="width: 100px;" type="button" value="Default" name="btndefault" id="btndefault" class="btn btn-dark"/>
+		    </form>
+		</div>
+	</div>
+
+	{% for time in times %}
+		<input type="hidden" id="hidden" name="custId" value="3487">
+	{% endfor %}
+
+	<script src="{% static 'js/time.js' %}"></script>
+{% endblock %}

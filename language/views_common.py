@@ -282,9 +282,13 @@ def get_next_levels (current_box):
 
 
 def get_time_step(user):
-	settings = User_TimeSettings.objects.get(user = user)
+	settings = User_TimeSettings.objects.filter(user = user)
 
-	time_settings_float = json.loads(settings.time_settings)
+	if not settings:
+		User_TimeSettings.objects.create(user = user)
+		settings = User_TimeSettings.objects.filter(user = user)
+
+	time_settings_float = json.loads(settings[0].time_settings)
 
 	time_settings = []
 
