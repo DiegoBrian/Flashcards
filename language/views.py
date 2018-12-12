@@ -9,7 +9,7 @@ def choose_language (request):
 	return render(request, 'language/index.html')
 
 def time(request):
-	print(get_time_step(request.user))
+	#print(get_time_step(request.user))
 
 	if request.method == 'POST':
 		t1n = request.POST['time1number']
@@ -48,9 +48,12 @@ def time(request):
 		 			convert_delta(t11n,t11s)]
 
 		set_time_step(request.user, time_step)
-			
-
-	return render(request, 'russian/time.html')
+	
+	context = {
+		'times' : revert_delta(request.user)
+	}
+	
+	return render(request, 'russian/time.html', context)
 	
 
 def convert_delta (time_number, time_select):
@@ -70,3 +73,42 @@ def convert_delta (time_number, time_select):
 			return datetime.timedelta(time_number*30)
 		elif time_select == 'year':
 			return datetime.timedelta(time_number*365)
+
+
+def revert_delta (user):
+	time_step = get_time_step(user)
+
+	time_str = []
+
+	for time in time_step:
+		date = time.days*86400+time.seconds
+		if date >= 31536000:
+			years = date/86400/365
+			years_str = str(years).rstrip('0').rstrip('.') 
+			time_str.append(years_str + " year(s)")
+		elif date >= 2592000:
+			months = date/86400/30
+			months_str = str(months).rstrip('0').rstrip('.')
+			time_str.append(months_str +" month(s)")
+		elif date >= 604800:
+			weeks = date/86400/7
+			weeks_str = str('%.1f' % weeks).rstrip('0').rstrip('.')
+			time_str.append(weeks_str +" week(s)")
+		elif date >= 86400:
+			days = date/86400
+			days_str = str(days).rstrip('0').rstrip('.')
+			time_str.append(days_str +" day(s)")
+		elif date >= 3600:
+			hours = date/3600
+			hours_str = str(hours).rstrip('0').rstrip('.')
+			time_str.append(hours_str +" hour(s)")
+		elif date >= 60:
+			minutes = date/60
+			minutes_str = str(minutes).rstrip('0').rstrip('.')
+			time_str.append(minutes_str +" minute(s)")
+		else:
+			seconds = date
+			seconds_str = str(seconds).rstrip('0').rstrip('.')
+			time_str.append(seconds_str + " second(s)")
+
+	return time_str
