@@ -16,16 +16,21 @@ def index (request):
 
 	level = get_level (data_bases, request.user)
 
-	#print("User level: " + str(level))
+	print("User level: " + str(level))
+
+	check_time_step(request.user)
 	
 	scraping = get_scraping (level)
 	
 	current_box = get_current_box (data_bases, request.user, level)
 
+	next_levels = get_next_levels(current_box)
+
 	context = {
 		'title': "Russian",
 		'soup' : scraping,
-		'current_box' : current_box
+		'current_box' : current_box,
+		'next_levels': next_levels
 	}
 		
 	return render(request, 'russian/words.html', context)
@@ -57,10 +62,9 @@ def get_file_path (level):
 	elif level <= words_step * 6:
 		specific_path = str(math.ceil (level/ (words_step * 2) ) + 2)
 
-	file_path = os.path.join (	BASE_DIR,
-								'russian\static\html\\Most Common Russian Words' 
-								+ specific_path
-								+ '.html')
+	file_path = 'russian' + get_slash() + 'static' + get_slash() + 'html' + get_slash() + 'Most Common Russian Words' + specific_path + '.html'
+
+	file_path = os.path.join (	BASE_DIR, file_path)
 
 	return file_path
 
@@ -163,6 +167,11 @@ def easy (request, number, current_box):
 		'current_box': current_box
 	}
 
+	print ("")
+	print ("Easy")
+	print ("    next:        " + str(number))
+	print ("    current-bos: " + str(current_box))
+
 	easy_common (data_bases, user_data)
 
 	return redirect('words')
@@ -185,6 +194,11 @@ def ok (request, number, current_box):
 		'current_box': current_box
 	}
 
+	print ("")
+	print ("Medium")
+	print ("    next:        " + str(number))
+	print ("    current-bos: " + str(current_box))
+
 	medium_common (data_bases, user_data)
 
 	return redirect('words')
@@ -206,6 +220,11 @@ def hard (request, number, current_box):
 		'next_level': number,
 		'current_box': current_box
 	}
+
+	print ("")
+	print ("Hard")
+	print ("    next:        " + str(number))
+	print ("    current-box: " + str(current_box))
 
 	hard_common (data_bases, user_data)
 

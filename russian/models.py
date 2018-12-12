@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from language.views_common import yesterday
 
 class Word(models.Model):
 	number = models.CharField('Number', max_length=10)
@@ -22,13 +23,8 @@ class User_Word(models.Model):
 	number = models.IntegerField('Word Number')
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
-
-	def create (user, time):
-		User_Word.objects.create(	user = user,
-									number = 1,
-									time = time)
 	
-	def create (user, time, number):
+	def create (user, time, number = 1):
 		User_Word.objects.create(	user = user,
 									number = number,
 									time = time)
@@ -45,7 +41,8 @@ class User_Word(models.Model):
 		return word.box
 
 	def relationship (user):
-		return User_Word.objects.filter(user = user)
+		relationship = User_Word.objects.filter(user = user)
+		return relationship
 
 	def latest_relationship (user):
 		relationship = User_Word.relationship(user)
@@ -71,13 +68,8 @@ class User_Expression(models.Model):
 	number = models.IntegerField('Expression Number')
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
-
-	def create (user, time):
-		User_Expression.objects.create(	user = user,
-									number = 1,
-									time = time)
 	
-	def create (user, time, number):
+	def create (user, time, number = 1):
 		User_Expression.objects.create(	user = user,
 									number = number,
 									time = time)

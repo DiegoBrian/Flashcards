@@ -5,23 +5,27 @@ from django.shortcuts import render, redirect
 from myproject.settings import BASE_DIR
 from django.utils import timezone
 from bs4 import BeautifulSoup
+from chinese.models import User_TimeSettings
 import datetime
+import json
 import math
 import os
+import humanfriendly
 
 ##	@var time_step
 #	Standard time steps
-time_step = [datetime.timedelta(0, 5), 
-			datetime.timedelta(0, 25), 
-			datetime.timedelta(0, 120), 
-			datetime.timedelta(0, 600), 
-			datetime.timedelta(0, 3600), 
-			datetime.timedelta(0, 18000), 
-			datetime.timedelta(1), 
-			datetime.timedelta(5), 
-			datetime.timedelta(25),
-			datetime.timedelta(120),
-			datetime.timedelta(365)]
+# time_step = [	datetime.timedelta(0, 15), 
+# 				datetime.timedelta(0, 30),
+# 				datetime.timedelta(0, 60),
+# 				datetime.timedelta(0, 120), 
+# 				datetime.timedelta(0, 600), 
+# 				datetime.timedelta(0, 3600), 
+# 				datetime.timedelta(0, 18000), 
+# 				datetime.timedelta(1), 
+# 				datetime.timedelta(5), 
+# 				datetime.timedelta(25),
+# 				datetime.timedelta(120),
+# 				datetime.timedelta(365)]
 ##	@var max_amount 
 #	Maximum capacity of snippets of languages, whether words, expressions or sentences
 max_amount	= 300
@@ -33,10 +37,19 @@ max_box		= 10
 min_box 	= 0
 ##	@var extr_step
 #	Time step for extreme ease
-extr_step 	= 6
+extr_step 	= 5
 ##	@var std_step
 #	Standard time step
 std_step 	= 1
+
+LINUX = "Linux"
+
+def get_slash():
+	if hasattr(os, 'uname') and os.uname().sysname == LINUX:
+		return '/'
+	else:
+		return '\\'
+
 
 ##	Acquisition of the user level
 #	@param data_bases Databases for a specific language
@@ -101,16 +114,19 @@ def easy_common (data_bases, user_data):
 	relationship = db.find(user, next_level)
 
 	if current_box != max_box:
-		if current_box == min_box:
-			step = extr_step
-		else:
-			step = std_step
+		step = get_easy_step(current_box)
 
 		current_box = current_box + step
 		
 		relationship.box = current_box
 
-	relationship.time = update_time (current_box)
+	print("")
+	print("Current box:	" + str(relationship.box))
+	print ("Current easy Time: " + str(relationship.time))
+	print("Time now: " + str(datetime.datetime.now()))
+	relationship.time = update_time(user, current_box)
+	print ("New easy Time:     " + str(relationship.time))
+	print("")
 	relationship.save()
 
 	return
@@ -126,7 +142,18 @@ def medium_common (data_bases, user_data):
 	current_box = user_data['current_box']
 
 	relationship =  db.find(user, next_level)
-	relationship.time = update_time(current_box)
+	print("")
+	print("NExt rec:	" + str(current_box))
+	print("box rec:	" + str(current_box))
+		
+	relationship.box = current_box
+	
+	print("Current box:	" + str(relationship.box))
+	print ("Current medium Time: " + str(relationship.time))
+	print("Time now: " + str(datetime.datetime.now()))
+	relationship.time = update_time(user, current_box)
+	print ("New medium Time:     " + str(relationship.time))
+	print("")
 	relationship.save()
 
 	return
@@ -143,13 +170,22 @@ def hard_common (data_bases, user_data):
 
 	relationship =  db.find(user, next_level)
 
-	if current_box > min_box:
-		current_box = current_box - std_step
-		relationship.box = current_box
-	elif current_box < min_box:
-		current_box = min_box
+	#relationship.box = current_box + get_hard_step(current_box)
 
-	relationship.time = update_time(current_box)
+	relationship.box = next_level
+
+	
+	print("")
+	print("Current box:	" + str(relationship.box))
+	print ("Current hard Time: " + str(relationship.time))
+
+	print("Time now: " + str(datetime.datetime.now()))
+	relationship.time = update_time(user, current_box)
+	
+	print ("New hard Time:     " + str(relationship.time))
+	print("")
+	
+
 	relationship.save()
 
 	return
@@ -162,5 +198,118 @@ def yesterday():
 #	@param current_box Current context 
 #	@return Time updated
 def update_time(current_box):
+	
+	print("")
+	print("Vai acrescentar: " + str_time(time_step[current_box]))
+	print("")
+
 	return timezone.now() + time_step[current_box]
 
+def str_time (time):
+	str_time = humanfriendly.format_timespan(time)
+	str_time = str_time.replace("seconds", "seg")
+	str_time = str_time.replace("minutes", "min")
+	str_time = str_time.replace("minute", "min")
+	str_time = str_time.replace("hours", "hr")
+	str_time = str_time.replace("hour", "hr")
+	str_time = str_time.replace("days", "dy")
+	str_time = str_time.replace("day", "dy")
+	str_time = str_time.replace("weeks", "w")
+	str_time = str_time.replace("week", "w")
+	str_time = str_time.replace("months", "m")
+	str_time = str_time.replace("month", "m")
+	str_time = str_time.replace("years", "y")
+	str_time = str_time.replace("year", "y")
+	str_time = str_time.replace(" and", ",")
+
+	return str_time
+
+def check_time_step(user):
+	print ("")
+	i = 0
+	time_step = get_time_step(user)
+	for time in time_step:
+		time_str = str_time(time)
+		print("Tempo[" + str(i) + "]: " + time_str)
+		i = i + 1
+	print ("")
+
+
+def get_easy_step (current_box):
+	if current_box == min_box:
+		step = extr_step
+	else:
+		step = std_step
+
+	return step
+
+def get_medium_step (current_box):
+	default_step = 2 * std_step
+
+	if current_box == min_box:
+		step = default_step
+	else:
+		step = std_step
+
+	return step
+
+def get_hard_step (current_box):
+	if current_box - std_step >= min_box:
+		step = - std_step
+	else:
+		step = 0
+	
+	return step
+
+def get_next_levels (current_box):
+	'''
+	print("")
+	print("Current-box to next levels")
+	print(str(current_box))
+	print("")
+	'''
+
+	step = get_easy_step (current_box)
+	next_easy = current_box + step
+
+	step = get_medium_step (current_box)
+	next_medium = current_box + step
+
+	step = get_hard_step (current_box)
+	next_hard = current_box + step
+
+	next_levels = {
+		'easy':		next_easy,
+		'medium':	next_medium,
+		'hard':		next_hard
+	}
+
+	return next_levels
+
+
+def get_time_step(user):
+	settings = User_TimeSettings.objects.filter(user = user)
+
+	if not settings:
+		User_TimeSettings.objects.create(user = user)
+		settings = User_TimeSettings.objects.filter(user = user)
+
+	time_settings_float = json.loads(settings[0].time_settings)
+
+	time_settings = []
+
+	for time in time_settings_float:
+		time_settings.append(datetime.timedelta(time/86400))
+
+	return time_settings
+
+
+
+def set_time_step(user, time_step):
+	time_step_json = []
+
+	for time in time_step:
+		date = time.days*86400+time.seconds
+		time_step_json.append(date)
+
+	User_TimeSettings.objects.filter(user = user).update(time_settings = time_step_json)

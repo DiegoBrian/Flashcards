@@ -14,5 +14,5 @@ urlpatterns = [
     path('eok/<int:number>/<int:current_box>/', expressions.ok, name='expression_ok'),
     path('eeasy/<int:number>/<int:current_box>/', expressions.easy, name='expression_easy'),
 
-	path('testes/', teste.teste, name='teste'),    
+	#path('testes/', teste.teste, name='teste'),    
 ]

@@ -1,19 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from russian.models import *
+from chinese.models import *
+from language.views_common import *
+import datetime
+import json
 
 
-def teste(request):
-
-	Word.objects.create(number = 1, word= u'简体中文', pronunciation = 'pronunciation', equivalence='equivalence')
-	
-	words = Word.objects.all()
-
-	context = {
-		'words': words
-	}
-
-	return render(request, 'russian/teste.html', context)
-	
 
 

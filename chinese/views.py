@@ -19,11 +19,14 @@ def index (request):
 
 	video = get_url_video (sentence.sentence)
 
+	next_levels = get_next_levels(current_box)
+
 	context = {
 		'title': "Chinese",
 		'sentence' : sentence,
 		'current_box' : current_box,
-		'video' : video
+		'video' : video,
+		'next_levels': next_levels
 	}
 
 	return render(request, 'index.html', context)

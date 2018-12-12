@@ -1,6 +1,11 @@
 from django.db import models
 from django.conf import settings
-from language.views_common import yesterday
+#from language.views_common import yesterday
+import datetime
+
+##	Acquisition of yesterday, correctly
+def yesterday():	
+	return datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class Sentence(models.Model):
 	number = models.IntegerField('Number', default=0, blank= True, null=True)
@@ -26,12 +31,7 @@ class User_Sentence(models.Model):
 	time = models.DateTimeField('Time')
 	box = models.IntegerField('Box', default=0)
 
-	def create (user, time):
-		User_Sentence.objects.create(user = user,
-									number = 1,
-									time = time)
-	
-	def create (user, time, number):
+	def create (user, time, number = 1):
 		User_Sentence.objects.create(user = user,
 									number = number,
 									time = time)
@@ -59,3 +59,7 @@ class User_Sentence(models.Model):
 	def get_level (user):
 		relationship = User_Sentence.relationship(user).order_by('-number').first()
 		return relationship.number
+
+class User_TimeSettings (models.Model):
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	time_settings = models.CharField('Time Settings', max_length=3000, default = '[15, 30, 60, 120, 600, 3600, 18000, 86400, 432000, 2160000, 10368000, 31536000]')
