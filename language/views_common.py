@@ -143,6 +143,11 @@ def medium_common (data_bases, user_data):
 
 	relationship =  db.find(user, next_level)
 	print("")
+	print("NExt rec:	" + str(current_box))
+	print("box rec:	" + str(current_box))
+		
+	relationship.box = current_box
+	
 	print("Current box:	" + str(relationship.box))
 	print ("Current medium Time: " + str(relationship.time))
 	print("Time now: " + str(datetime.datetime.now()))
@@ -173,12 +178,14 @@ def hard_common (data_bases, user_data):
 	print("")
 	print("Current box:	" + str(relationship.box))
 	print ("Current hard Time: " + str(relationship.time))
+
 	print("Time now: " + str(datetime.datetime.now()))
 	relationship.time = update_time(user, current_box)
 	
 	print ("New hard Time:     " + str(relationship.time))
 	print("")
 	
+
 	relationship.save()
 
 	return
@@ -190,13 +197,12 @@ def yesterday():
 ##	Acquisition of next sentence test time
 #	@param current_box Current context 
 #	@return Time updated
-def update_time(user, current_box):
-	'''
+def update_time(current_box):
+	
 	print("")
 	print("Vai acrescentar: " + str_time(time_step[current_box]))
 	print("")
-	'''
-	time_step = get_time_step(user)
+
 	return timezone.now() + time_step[current_box]
 
 def str_time (time):
@@ -243,7 +249,7 @@ def get_medium_step (current_box):
 	if current_box == min_box:
 		step = default_step
 	else:
-		step = 0
+		step = std_step
 
 	return step
 

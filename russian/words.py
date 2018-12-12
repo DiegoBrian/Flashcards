@@ -62,16 +62,9 @@ def get_file_path (level):
 	elif level <= words_step * 6:
 		specific_path = str(math.ceil (level/ (words_step * 2) ) + 2)
 
-	file_path = os.path.join (	BASE_DIR,
-								'russian'
-								+ get_slash()
-								+ 'static'
-								+ get_slash()
-								+ 'html'
-								+ get_slash()
-								+ 'Most Common Russian Words'
-								+ specific_path
-								+ '.html')
+	file_path = 'russian' + get_slash() + 'static' + get_slash() + 'html' + get_slash() + 'Most Common Russian Words' + specific_path + '.html'
+
+	file_path = os.path.join (	BASE_DIR, file_path)
 
 	return file_path
 

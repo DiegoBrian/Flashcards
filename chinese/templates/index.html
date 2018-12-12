@@ -2,59 +2,94 @@
 {% load version %}
 
 {% block content %}
-	<div class="flipArea">
-		<div>
+	<div class="row">
+		<div class="subjectArea col-12 col-md-8 bg-light border">
 			<video class="video" controls>
-				<source src="{{video}}" type="video/mp4">
-				Your browser does not support the video tag.
+				<source src="{{ video }}" type="video/mp4">
+					Your browser does not support the video tag.
 			</video>
+
+			<!-- Legendas -->
+			<div class="flipArea">
+				<div class="flip">
+					<div class="face face1"></div>
+					<div class="face face2"></div>
+				</div>
+			
+				<ul class="store my-auto">
+					<li>
+						<div class="content bg-light" id="chi_ch_face">
+							{{sentence.sentence|filter_chinese}}
+						</div>
+					</li>
+					<li>
+						<div class="content bg-light" id="chi_pi_face">
+							{%if sentence.pinyin %}
+								{{sentence.pinyin}}
+							{% else %}
+								<i>"Pinyin"</i>
+							{% endif %}
+						</div>
+					</li>
+					<li>
+						<div class="content bg-light" id="chi_en_face">
+							{%if sentence.equivalence %}
+								{{sentence.equivalence}}
+							{% else %}
+								<i>"English"</i>
+							{% endif %}
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 
-		<div class="newCard" id="flip-ex">
-			<div class="front">
-				<div id="sumir-snd">
-					<h2>{{sentence.sentence|filter_chinese}}</h2>
-				</div>
-				<div id="sumir-fst" style="display: none">
-					{%if sentence.equivalence %}
-						<h3>{{sentence.equivalence}}</h3>
-					{% else %}
-						<h3><i>"English"</i></h3>
-					{% endif %}
+		<!-- Painel de controle do usuário -->
+		<div class="col-4 col-md-4 my-auto">
+			<!-- Nível de dificuldade -->
+			<div class="card text-center">
+				<h4 class="card-header">Difficult</h4>
+				<div class="card-body">
+					<a	class="btn btn-danger" role="button" id="bHard"
+						href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
+						High <br> ({{ next_levels.hard | time:user }})
+					</a>
+					
+					<a class="btn btn-warning" role="button" id="bGood"
+						href="{% url 'sentence_ok' number=sentence.number current_box=next_levels.medium %}" >
+						Medium <br> ({{ next_levels.medium | time:user }})
+					</a>
+					
+					<a class="btn btn-success" role="button" id="bEasy"
+						href="{% url 'sentence_easy' number=sentence.number current_box=next_levels.easy %}" >
+						Low <br> ({{ next_levels.easy | time:user }})
+					</a>
 				</div>
 			</div>
-			<div class="back">
-				{%if sentence.pinyin %}
-					<h3>{{sentence.pinyin}}</h3>
-				{% else %}
-					<h3><i>"Pinyin"</i></h3>
-				{% endif %}
-			</div>
+			
+			<!-- Idioma de exibição -->
+			<div class="card text-center">
+				<h4 class="card-header">Exhibition language</h4>
+				<div class="card-body">
+					<button class="btn btn-primary" id="flipper_chi_ch">
+						Chinese
+					</button>
+					
+					<button class="btn btn-primary" id="flipper_chi_pi">
+						Pinyin
+					</button>
+					
+					<button class="btn btn-primary" id="flipper_chi_en">
+						English
+					</button>
+				</div>
+			</div>			
 		</div>
-
-		<a	class="btn btn-danger" role="button" id="bHard"
-			href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
-			Hard <br> (< {{ next_levels.hard | time:user }} )
-		</a>
-
-		<a class="btn btn-warning" role="button" id="bGood"
-			href="{% url 'sentence_ok' number=sentence.number current_box=next_levels.medium %}" >
-			Good <br> (< {{ next_levels.medium | time:user }} )
-		</a>
-		
-		<a class="btn btn-success" role="button" id="bEasy"
-			href="{% url 'sentence_easy' number=sentence.number current_box=next_levels.easy %}" >
-			Easy <br> (< {{ next_levels.easy | time:user }} )
-		</a>
-
-		<button class="btn btn-primary flip-btn" id="flipper" style="display: block">Flip</button>
-
 	</div>
 
-	<!--
 	Current_box = {{ current_box }} <br>
 	Easy = {{ next_levels.easy }} <br>
 	Medium = {{ next_levels.medium }} <br>
 	Hard = {{ next_levels.hard }} <br>
-	-->
+
 {% endblock %}

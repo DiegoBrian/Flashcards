@@ -1,6 +1,6 @@
 /*
-$("#front").show();
-$("div .back").hide();
+$("#front").removeClass("d-none");
+$("div .back").addClass("d-none");
 //*/
 var sumir = false;
 
@@ -23,29 +23,75 @@ $("#btn-back").on("click",function(){
 	$(this).closest(".card").flip(false);
 	$('#subtitle1').toggle();
 	$('#subtitle2').toggle();
-	$("#btn-front").hide();
-	$("#buttons").show();
-	/*
-	$("div .back").hide();
-	$("#front").show();
-	//*/
-	//alert("back");
+	$("#btn-front").addClass("d-none");
+	$("#buttons").removeClass("d-none");
 });
 
+var topCard = 1;
+var facingUp = true;
 
-$("#flipper").on("click", function flip() {
-	$('#flip-ex').toggleClass('flipped');
-	//$('#bEasy').hide();
-	if (!$('#flip-ex').hasClass('flipped')){
-		if(!sumir){
-			$('#sumir-fst').show();
-			$('#sumir-snd').hide();
-			//$('#bGood').hide();
-			$('#flipper').hide();
-		}else{
-			$('#sumir-fst').hide();
-			$('#sumir-snd').show();
-			
-		}
-	}
+function flipCard(n) {
+    if (topCard === n) return;
+
+    // Replace the contents of the current back-face with the contents
+    // of the element that should rotate into view.
+    var curBackFace = $('.' + (facingUp ? 'face2' : 'face1'));
+    var nextContent = $('.store' + n).html(); 
+    var nextContent = $('.store li:nth-child(' + n + ')').html(); 
+    curBackFace.html(nextContent);
+
+    // Rotate the content
+    $('.flip').toggleClass('flipped');
+    topCard = n;
+    facingUp = !facingUp;
+}
+
+$('#flipper_chi_ch').on('click', function(){
+	esconder("flipper_chi_ch");
+	exibir("flipper_chi_pi");
+	exibir("flipper_chi_en");
+
+	flipCard(1);
 });
+
+$('#flipper_chi_pi').on('click', function(){
+	exibir("flipper_chi_ch");
+	esconder("flipper_chi_pi");
+	exibir("flipper_chi_en");
+
+	flipCard(2);
+});
+
+$('#flipper_chi_en').on('click', function(){
+	exibir("flipper_chi_ch");
+	exibir("flipper_chi_pi");
+	esconder("flipper_chi_en");
+	
+	flipCard(3);
+});
+
+$(document).ready(function(){
+    // Add the appropriate content to the initial "front side"
+    var frontFace = $('.face1');
+    var frontContent = $('.store li:first-child').html(); 
+	frontFace.html(frontContent);
+
+
+	esconder("flipper_chi_ch");
+
+	esconder("flipper_rus_cy");
+});
+
+function exibir(id){
+	var element = document.getElementById(id);
+
+	if(element && element.hasAttribute("disabled"))
+		element.removeAttribute("disabled");
+}
+
+function esconder(id){
+	var element = document.getElementById(id);
+
+	if(element && !element.hasAttribute("disabled"))
+		element.setAttribute("disabled", "disabled");
+}
