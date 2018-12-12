@@ -249,7 +249,7 @@ def get_medium_step (current_box):
 	if current_box == min_box:
 		step = default_step
 	else:
-		step = std_step
+		step = 0
 
 	return step
 
