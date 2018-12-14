@@ -3,9 +3,9 @@
 
 {% block content %}
 	<div class="card">
-        <div class="card-body">
+        <div class="card-body text-center">
 		    <h1>Set Time Intervals</h1>
-		    Pimsleur's graduated-interval, is a scale designed to help language learning. The content being learned will repeat itself after 5 seconds, then 25 seconds, and then 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months and finally 2 years. The cards in this application follow this interval, taking more or less time to appear after each occurance, depending on the difficulty registered each time. If you click on the "Easy" button, the card will go to the next step of the scale, taking a longer time to repeat itself. If you click on the "Good" button, the card will stay on the same step of the scale that it is in. If you click on the "Hard" button, the card will go to the earlier step of the scale, taking a shorter time to repeat itself. So, if you want to make your learning faster or slower you can change the repetition intervals.
+		    Pimsleur's graduated-interval, is a scale designed to help language learning. The content being learned will repeat itself after 5 seconds, then 25 seconds, and then 2 minutes, 10 minutes, 1 hour, 5 hours, 1 day, 5 days, 25 days, 4 months and finally 2 years. The cards in this application follow this interval, taking more or less time to appear after each occurance, depending on the difficulty registered each time. If you click on the "Low" button, the card will go to the next step of the scale, taking a longer time to repeat itself. If you click on the "Medium" button, the card will stay on the same step of the scale that it is in. If you click on the "High" button, the card will go to the earlier step of the scale, taking a shorter time to repeat itself. So, if you want to make your learning faster or slower you can change the repetition intervals.
 		    <br>
 		    <h5><b>Current configuration:</b></h5>
 		    {% for time in times %}
