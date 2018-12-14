@@ -197,8 +197,10 @@ def yesterday():
 ##	Acquisition of next sentence test time
 #	@param current_box Current context 
 #	@return Time updated
-def update_time(current_box):
+def update_time(user, current_box):
 	
+	time_step = get_time_step(user)
+
 	print("")
 	print("Vai acrescentar: " + str_time(time_step[current_box]))
 	print("")

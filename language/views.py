@@ -6,7 +6,7 @@ import datetime
 import json
 
 def choose_language (request):
-	return render(request, 'language/index.html')
+	return render(request, 'russian/home.html')
 
 def time(request):
 	#print(get_time_step(request.user))
