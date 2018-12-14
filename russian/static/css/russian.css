@@ -12,6 +12,10 @@ img {
     width: 80%;
 }
 
+.sound {
+    width: 80%;
+}
+
 .card {
     margin: 2%;
 }
@@ -32,9 +36,10 @@ img {
 .subjectArea{
     width: 80%;
     border-radius: 40px;
-    padding: 1%;
+    padding: 2%;
     margin: auto;
     text-align: center;
+
 }
 
 .flipArea {

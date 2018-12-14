@@ -2,7 +2,7 @@
 {% load version %}
 
 {% block content %}
-	<div class="row">
+	<div class="row py-5">
 		<div class="subjectArea col-12 col-md-8 bg-light border">
 			<video class="video" controls>
 				<source src="{{ video }}" type="video/mp4">
@@ -41,6 +41,7 @@
 						</div>
 					</li>
 				</ul>
+				<!--<br>-->
 			</div>
 		</div>
 
@@ -48,7 +49,7 @@
 		<div class="col-4 col-md-4 my-auto">
 			<!-- Nível de dificuldade -->
 			<div class="card text-center">
-				<h4 class="card-header">Difficult</h4>
+				<h4 class="card-header">Difficulty</h4>
 				<div class="card-body">
 					<a	class="btn btn-danger" role="button" id="bHard"
 						href="{% url 'sentence_hard' number=sentence.number current_box=next_levels.hard %}" >
@@ -87,9 +88,10 @@
 		</div>
 	</div>
 
+	<!--
 	Current_box = {{ current_box }} <br>
 	Easy = {{ next_levels.easy }} <br>
 	Medium = {{ next_levels.medium }} <br>
 	Hard = {{ next_levels.hard }} <br>
-
+	-->
 {% endblock %}
