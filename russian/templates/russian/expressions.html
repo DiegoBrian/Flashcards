@@ -58,12 +58,12 @@
                     
                     <a class="btn btn-warning" role="button" id="bGood"
                         href="{% url 'expression_ok' number=soup.number|to_int current_box=next_levels.medium %}" >
-                        Medium <br> ({{ next_levels.medium | time:user }})
+                        Medium <br> {{ next_levels.medium | time:user }}
                     </a>
                     
                     <a class="btn btn-success" role="button" id="bEasy"
                         href="{% url 'expression_easy' number=soup.number|to_int current_box=next_levels.easy %}" >
-                        Low <br> ({{ next_levels.easy | time:user }})
+                        Low <br> {{ next_levels.easy | time:user }}
                     </a>
                 </div>
             </div>
