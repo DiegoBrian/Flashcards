@@ -2,7 +2,7 @@
 {% load version %}
 
 {% block content %}
-	<div class="row">
+	<div class="row py-5">
 		<div class="subjectArea col-12 col-md-8 bg-light border">
 			<video class="video" controls>
 				<source src="{{ video }}" type="video/mp4">
@@ -41,6 +41,7 @@
 						</div>
 					</li>
 				</ul>
+				<!--<br>-->
 			</div>
 		</div>
 
@@ -87,9 +88,10 @@
 		</div>
 	</div>
 
+	<!--
 	Current_box = {{ current_box }} <br>
 	Easy = {{ next_levels.easy }} <br>
 	Medium = {{ next_levels.medium }} <br>
 	Hard = {{ next_levels.hard }} <br>
-
+	-->
 {% endblock %}
