@@ -1,0 +1,10 @@
+{% extends "russian/base.html" %}
+{% load static %}
+{% load version %}  
+
+{% block content %}
+    <div class="content" style="margin-top: 2%; margin-left: 2%;">
+        <p><a href="{% url 'chinese_index' %}">Chinese movies</a></p>
+        <p><a href="{% url 'index' %}">Russian words and expressions</a></p>
+    </div>
+{% endblock %}

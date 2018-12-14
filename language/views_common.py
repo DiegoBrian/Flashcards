@@ -113,12 +113,7 @@ def easy_common (data_bases, user_data):
 
 	relationship = db.find(user, next_level)
 
-	if current_box != max_box:
-		step = get_easy_step(current_box)
-
-		current_box = current_box + step
-		
-		relationship.box = current_box
+	relationship.box = current_box
 
 	print("")
 	print("Current box:	" + str(relationship.box))
@@ -172,7 +167,13 @@ def hard_common (data_bases, user_data):
 
 	#relationship.box = current_box + get_hard_step(current_box)
 
-	relationship.box = next_level
+	#relationship.box = next_level
+
+	step = get_hard_step(current_box)
+
+	#current_box = current_box + step
+		
+	relationship.box = current_box
 
 	
 	print("")
@@ -197,8 +198,10 @@ def yesterday():
 ##	Acquisition of next sentence test time
 #	@param current_box Current context 
 #	@return Time updated
-def update_time(current_box):
+def update_time(user, current_box):
 	
+	time_step = get_time_step(user)
+
 	print("")
 	print("Vai acrescentar: " + str_time(time_step[current_box]))
 	print("")

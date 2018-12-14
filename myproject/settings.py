@@ -124,5 +124,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'myproject', 'media')
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'choose_language'
+LOGOUT_REDIRECT_URL = 'choose_language'

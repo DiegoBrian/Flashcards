@@ -1,5 +1,6 @@
 from django import template
 from language.views_common import str_time, get_time_step, set_time_step
+from language.views import revert_delta
 
 register = template.Library()
 
@@ -21,9 +22,9 @@ def time(current_box, user):
 	else:
 		pos = current_box
 	
-	time_step = get_time_step(user)
+	time_step = revert_delta(user)
 
-	return str_time(time_step[pos])
+	return time_step[pos]
 
 
 @register.filter()
