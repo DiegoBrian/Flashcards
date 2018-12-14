@@ -113,12 +113,7 @@ def easy_common (data_bases, user_data):
 
 	relationship = db.find(user, next_level)
 
-	if current_box != max_box:
-		step = get_easy_step(current_box)
-
-		current_box = current_box + step
-		
-		relationship.box = current_box
+	relationship.box = current_box
 
 	print("")
 	print("Current box:	" + str(relationship.box))
@@ -172,7 +167,13 @@ def hard_common (data_bases, user_data):
 
 	#relationship.box = current_box + get_hard_step(current_box)
 
-	relationship.box = next_level
+	#relationship.box = next_level
+
+	step = get_hard_step(current_box)
+
+	#current_box = current_box + step
+		
+	relationship.box = current_box
 
 	
 	print("")
