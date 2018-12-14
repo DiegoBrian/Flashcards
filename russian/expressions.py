@@ -18,10 +18,13 @@ def index (request):
 
 	current_box = get_current_box (data_bases, request.user, level)
 
+	next_levels = get_next_levels(current_box)
+
 	context = {
 		'title': "Russian",
 		'soup' : scraping,
-		'current_box' : current_box
+		'current_box' : current_box,
+		'next_levels': next_levels
 	}
 
 	return render(request, 'russian/expressions.html', context)
