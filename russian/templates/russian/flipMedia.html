@@ -1,0 +1,97 @@
+{% extends "russian/base.html" %}
+{% load static %}
+{% load version %}
+
+{% block content %}
+    <div class="row py-5">
+        <div class="subjectArea col-12 col-md-8 bg-light border">
+            {% if studyObject.media.type == 'audio' %}
+                <audio class="sound" src="{{ studyObject.media.source }}" controls>
+                    Your browser does not support the <code>audio</code> element.
+                </audio>
+            {% elif studyObject.media.type == 'video' %}
+                Video
+            {% endif %}
+            
+
+            <!-- Legendas -->
+            <div class="flipArea">
+                <div class="flip">
+                    <div class="face face1"></div>
+                    <div class="face face2"></div>
+                </div>
+            
+                <ul class="store">
+                    {% for subtitle in studyObject.subtitles %}
+                        {% with counter=forloop.counter0|slugify%}
+                            {% with id_face="face_"|add:counter %}
+                                {% if subtitle.text %}
+                                    <li>
+                                        <div class="content bg-light" id="{{ id_face }}">
+                                            {{ subtitle.text }}
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endwith%}
+                        {% endwith %}
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+
+            
+        </div>
+
+        <!-- Painel de controle do usuário -->
+		<div class="col-4 col-md-4 my-auto">
+            <!-- Nível de dificuldade -->
+            <div class="card text-center">
+                <h4 class="card-header">Difficulty</h4>
+                <div class="card-body">
+                    <a	class="btn btn-danger" role="button" id="bHard"
+                        href="{% url 'word_hard' number=studyObject.number|to_int current_box=next_levels.hard %}" >
+                        High <br> ({{ next_levels.hard | time:user }})
+                    </a>
+                    
+                    <a class="btn btn-warning" role="button" id="bGood"
+                        href="{% url 'word_ok' number=studyObject.number|to_int current_box=next_levels.medium %}" >
+                        Medium <br> ({{ next_levels.medium | time:user }})
+                    </a>
+                    
+                    <a class="btn btn-success" role="button" id="bEasy"
+                        href="{% url 'word_easy' number=studyObject.number|to_int current_box=next_levels.easy %}" >
+                        Low <br> ({{ next_levels.easy | time:user }})
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Idioma de exibição -->
+            <div class="card text-center">
+                <h4 class="card-header">Exhibition language</h4>
+                <div class="card-body">
+                    {% for subtitle in studyObject.subtitles %}
+                        {% with counter=forloop.counter0|slugify%}
+                            {% with id_btn="flip_btn_"|add:counter %}
+                                {% if subtitle.language %}
+                                    <button class="btn btn_flip btn-primary" id="{{ id_btn }}">
+                                        {{ subtitle.language }}
+                                    </button>
+                                {% endif %}
+                            {% endwith%}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            </div>			
+        </div>
+    </div>
+
+    {{ title }}
+    <br><br>
+    {{ studyObject }}
+    <br><br>
+    {{ soup }}
+    <br><br>
+    {{ current_box }}
+    <br><br>
+    {{ next_levels }}
+{% endblock %}
