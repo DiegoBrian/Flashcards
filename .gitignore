@@ -2,3 +2,5 @@
 db.sqlite3
 # Test Videos Chinese
 russian/video
+# Cache Files
+*.pyc
